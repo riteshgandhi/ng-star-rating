@@ -1,0 +1,25 @@
+.star {
+    cursor: pointer;
+    font-size: x-large;
+    width: 20px;
+    display: inline-block;
+    color: gray;
+}
+.star:last-child {
+    margin-right: 0;
+}
+.star:before {
+    content:'\2605';
+}
+.star.on {
+    color: gold;
+}
+/* .star.half:after {
+    --onCheckedColor: red;
+    content:'\2605';
+    color: var(--onCheckedColor);
+    position: absolute;
+    margin-left: -20px;
+    width: 10px;
+    overflow: hidden;
+} */

@@ -1,0 +1,75 @@
+<!-- <table>
+    <tr>
+        <td>
+            <star-rating id="starrating1" value="5" checkedcolor="red" bordercolor="blue" radius="5" canvaswidth="100"
+                canvasheight="20">
+            </star-rating>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <star-rating id="starrating2" value="2" checkedcolor="orange" bordercolor="orange" radius="5" canvaswidth="100"
+                canvasheight="20">
+            </star-rating>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <star-rating id="starrating3" value="3" checkedcolor="red" bordercolor="red" radius="5" canvaswidth="100"
+                canvasheight="20">
+            </star-rating>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <star-rating id="starrating4" value="4" checkedcolor="pink" bordercolor="pink" radius="5" canvaswidth="100"
+                canvasheight="20" uncheckedcolor="purple">
+            </star-rating>
+        </td>
+    </tr>
+</table> -->
+
+<table>
+    <thead>
+        <tr>
+            <th>
+                Checked Color
+            </th>
+            <th>
+                UnChecked Color
+            </th>
+            <th>
+                Rating Value
+            </th>
+            <th>
+                Star Rating
+            </th>
+            <th>
+                Size
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                <input type="text" [(ngModel)]="checkedColor">
+            </td>
+            <td>
+                <input type="text" [(ngModel)]="unCheckedColor">
+            </td>
+            <td>
+                <input type="number" [(ngModel)]="value" value="{{value}}">
+            </td>
+            <td>
+                <input type="number" [(ngModel)]="size" value="{{size}}">
+            </td>
+            <td>
+                <star-rating id="starrating1" #starRating></star-rating>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<!-- <star-rating id="starrating1" value="5" checkedColor="gold" unCheckedColor="gray" #starRating>
+</star-rating> -->
+<!-- <star-rating id="starrating2" value="3.5" checkedcolor="red" uncheckedcolor="gray" size="20">
+</star-rating> -->
