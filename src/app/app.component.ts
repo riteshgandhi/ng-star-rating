@@ -1,109 +1,53 @@
-import { Component, ViewChild, Input } from '@angular/core';
-import { Subject } from 'rxjs';
-import { StarRatingComponent } from 'rating';
+import { Component } from '@angular/core';
+import { ratingElement } from '../app/ratingElement';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
+
 export class AppComponent {
   title = 'rg-rating';
-  private _checkedColor: string;
-  private _unCheckedColor: string;
-  private _size: number;
-  private _value: number;
-  private onValueChange:Subject<number>;
-  private onCheckedColorChange:Subject<string>;
-  private onUnCheckedColorChange:Subject<string>;
-  private onSizeChange:Subject<number>;
-
-  @ViewChild('starRating') starRating: StarRatingComponent;
-
-  get checkedColor(): string {
-    return this._checkedColor;
-  }
-
-  get unCheckedColor(): string {
-    return this._unCheckedColor;
-  }
-
-  get value(): number {
-    return this._value;
-  }
-
-  get size(): number {
-    return this._size;
-  }
-
-  @Input('checkedColor') set checkedColor(value: string) {
-    this._checkedColor = value;
-    if (this._checkedColor) {
-      this.onCheckedColorChange.next(this._checkedColor);
-    }
-  }
-
-  @Input('unCheckedColor') set unCheckedColor(value: string) {
-    this._unCheckedColor = value;
-    if (this._unCheckedColor) {
-      this.onUnCheckedColorChange.next(this._unCheckedColor);
-    }
-  }
-
-  @Input('value') set value(value: number) {
-    this._value = value;
-    this.onValueChange.next(this._value);
-  }
-
-  @Input('size') set size(value: number) {
-    if (!value || value == null) {
-      value = 24;
-    }
-
-    this._size = value;
-    this.onSizeChange.next(this._size);
-  }
+  private starRatingElements:Array<ratingElement> = [];
 
   constructor() { }
 
   ngOnInit() {
-    if (!this.onValueChange) {
-      this.onValueChange = new Subject();
-      this.onValueChange.subscribe(newValue => {
-        this.starRating.value = this._value;
-      });
-    }
+    let ratingElement1 = new ratingElement();
+    ratingElement1.readonly = true;
+    ratingElement1.checkedcolor = "red";
+    ratingElement1.uncheckedcolor = "green";
+    ratingElement1.value = 1;
 
-    if (!this.onCheckedColorChange) {
-      this.onCheckedColorChange = new Subject();
-      this.onCheckedColorChange.subscribe(newValue => {
-        this.starRating.checkedColor = this._checkedColor;
-      });
-    }
+    let ratingElement2 = new ratingElement();
+    ratingElement2.readonly = true;
+    ratingElement2.checkedcolor = "yellow";
+    ratingElement2.uncheckedcolor = "red";
+    ratingElement2.value = 2;
 
-    if (!this.onUnCheckedColorChange) {
-      this.onUnCheckedColorChange = new Subject();
-      this.onUnCheckedColorChange.subscribe(newValue => {
-        this.starRating.unCheckedColor = this._unCheckedColor;
-      });
-    }
+    let ratingElement3 = new ratingElement();
+    ratingElement3.readonly = true;
+    ratingElement3.checkedcolor = "orange";
+    ratingElement3.uncheckedcolor = "yellow";
+    ratingElement3.value = 3;
 
-    if (!this.onSizeChange) {
-      this.onSizeChange = new Subject();
-      this.onSizeChange.subscribe(newValue => {
-        this.starRating.size = `${this._size}px`;
-      });
-    }
+    let ratingElement4 = new ratingElement();
+    ratingElement4.readonly = true;
+    ratingElement4.checkedcolor = "black";
+    ratingElement4.uncheckedcolor = "orange";
+    ratingElement4.value = 4;
 
-    this.checkedColor="gold";
-    this.unCheckedColor="gray";
-    this.value=3.5;
-    this.size = 24;
+    let ratingElement5 = new ratingElement();
+    ratingElement5.readonly = true;
+    ratingElement5.checkedcolor = "pink";
+    ratingElement5.uncheckedcolor = "black";
+    ratingElement5.value = 5;
+
+    this.starRatingElements.push(ratingElement1);
+    this.starRatingElements.push(ratingElement2);
+    this.starRatingElements.push(ratingElement3);
+    this.starRatingElements.push(ratingElement4);
+    this.starRatingElements.push(ratingElement5);
   }
-
-  // private applyChanges() {
-  //   this.starRating.checkedColor = this._checkedColor;
-  //   this.starRating.unCheckedColor = this._unCheckedColor;
-  //   this.starRating.value = this._value;
-  // }
 }

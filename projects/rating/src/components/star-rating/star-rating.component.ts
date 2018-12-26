@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild } from '@angular/core';
+import { Component, Input, ViewChild, ElementRef } from '@angular/core';
 import { Subject } from 'rxjs';
 
 @Component({
@@ -53,20 +53,22 @@ export class StarRatingComponent {
   private _unCheckedColor: string;
   private _value: number;
   private _size: string;
+  private _readOnly: boolean;
 
-  private onValueChange:Subject<number>;
-  private onCheckedColorChange:Subject<string>;
-  private onUnCheckedColorChange:Subject<string>;
-  private onSizeChange:Subject<string>;
+  private onValueChange: Subject<number>;
+  private onCheckedColorChange: Subject<string>;
+  private onUnCheckedColorChange: Subject<string>;
+  private onSizeChange: Subject<string>;
+  private onReadOnlyChange: Subject<boolean>;
 
-  @ViewChild('starMain') private mainElement: any;
-  @ViewChild('star1') private star1Element: any;
-  @ViewChild('star2') private star2Element: any;
-  @ViewChild('star3') private star3Element: any;
-  @ViewChild('star4') private star4Element: any;
-  @ViewChild('star5') private star5Element: any;
+  @ViewChild('starMain') private mainElement: ElementRef;
+  @ViewChild('star1') private star1Element: ElementRef;
+  @ViewChild('star2') private star2Element: ElementRef;
+  @ViewChild('star3') private star3Element: ElementRef;
+  @ViewChild('star4') private star4Element: ElementRef;
+  @ViewChild('star5') private star5Element: ElementRef;
 
-  constructor() { 
+  constructor() {
     if (!this.onValueChange) {
       this.onValueChange = new Subject();
       this.onValueChange.subscribe(() => {
@@ -96,14 +98,19 @@ export class StarRatingComponent {
       });
     }
 
-    // this.setStars();
+    if (!this.onReadOnlyChange) {
+      this.onReadOnlyChange = new Subject();
+      this.onReadOnlyChange.subscribe(() => {
+        this.addRemoveEvents();
+      });
+    }
   }
-  
-  get checkedColor(): string {
+
+  get checkedcolor(): string {
     return this._checkedColor;
   }
 
-  get unCheckedColor(): string {
+  get uncheckedcolor(): string {
     return this._unCheckedColor;
   }
 
@@ -115,14 +122,18 @@ export class StarRatingComponent {
     return this._size;
   }
 
-  @Input('checkedColor') set checkedColor(value: string) {
+  get readonly(): boolean {
+    return String(this._readOnly) === "true";
+  }
+
+  @Input('checkedcolor') set checkedcolor(value: string) {
     this._checkedColor = value;
     if (this._checkedColor) {
       this.onCheckedColorChange.next(this._checkedColor);
     }
   }
 
-  @Input('unCheckedColor') set unCheckedColor(value: string) {
+  @Input('uncheckedcolor') set uncheckedcolor(value: string) {
     this._unCheckedColor = value;
     if (this._unCheckedColor) {
       this.onUnCheckedColorChange.next(this._unCheckedColor);
@@ -137,10 +148,10 @@ export class StarRatingComponent {
     if (value > 5) {
       value = 5;
     }
-    
+
     this._value = value;
 
-    if (this._value >=0) {
+    if (this._value >= 0) {
       this.onValueChange.next(this._value);
     }
   }
@@ -153,16 +164,40 @@ export class StarRatingComponent {
     this.onSizeChange.next(this._size);
   }
 
-  private ngAfterViewInit() {
+  @Input('readonly') set readonly(value: boolean) {
+    this._readOnly = value;
+    this.onReadOnlyChange.next(value);
+  }
+
+  private makeEditable() {
     this.stars.forEach(star => {
       star.nativeElement.addEventListener('click', this.rate.bind(this));
       star.nativeElement.addEventListener('mouseover', this.rate.bind(this));
     });
   }
 
-  private rate(event) {
-    let star = event.srcElement;
-    this.value = star.dataset.index;
+  private makeReadOnly() {
+    this.stars.forEach((star:ElementRef) => {
+      star.nativeElement.__zone_symbol__clickfalse = null;
+      star.nativeElement.__zone_symbol__mouseoverfalse = null;
+    });
+  }
+
+  private addRemoveEvents() {
+    if (this.readonly) {
+      this.makeReadOnly();
+    } else {
+      this.makeEditable();
+      this.onValueChange.next(this.value);
+    }
+  }
+
+  private ngAfterViewInit() {
+  }
+
+  private rate(event:MouseEvent) {
+    let star:HTMLElement = <HTMLElement> event.srcElement;
+    this.value = parseInt(star.dataset.index);
     if (this.value == 0) {
       this.value = 1;
     }
@@ -180,12 +215,12 @@ export class StarRatingComponent {
 
   private applySizeAllStars() {
     if (this._size) {
-      this.stars.forEach(star => {
+      this.stars.forEach((star:ElementRef) => {
         let newSize = this.size.match(/\d+/)[0];
-        let halfSize = (parseInt(newSize) * 10)/24;
-        let halfMargin = 0-((parseInt(newSize) * 20)/24);
+        let halfSize = (parseInt(newSize) * 10) / 24;
+        let halfMargin = 0 - ((parseInt(newSize) * 20) / 24);
         star.nativeElement.style.setProperty('--size', this.size);
-        if (star.nativeElement.classList.contains("half")){
+        if (star.nativeElement.classList.contains("half")) {
           star.nativeElement.style.setProperty('--halfWidth', `${halfSize}px`);
           star.nativeElement.style.setProperty('--halfMargin', `${halfMargin}px`);
         }
@@ -193,7 +228,7 @@ export class StarRatingComponent {
     }
   }
 
-  private applyColorStyleAllStars(setChecked:boolean) {
+  private applyColorStyleAllStars(setChecked: boolean) {
     this.stars.forEach(star => {
       if (setChecked) {
         this.applyCheckedColorStyle(star.nativeElement);
@@ -203,25 +238,28 @@ export class StarRatingComponent {
     });
   }
 
-  private applyColorStyle(starElement: any) {
+  private applyColorStyle(starElement: HTMLSpanElement) {
     this.applyCheckedColorStyle(starElement);
     this.applyUnCheckedColorStyle(starElement);
   }
 
-  private applyCheckedColorStyle(starElement: any) {
-    starElement.style.setProperty('--checkedColor', this.checkedColor);
+  private applyCheckedColorStyle(starElement: HTMLSpanElement) {
+    starElement.style.setProperty('--checkedColor', this.checkedcolor);
   }
 
-  private applyUnCheckedColorStyle(starElement: any) {
-    starElement.style.setProperty('--unCheckedColor', this.unCheckedColor);
+  private applyUnCheckedColorStyle(starElement: HTMLSpanElement) {
+    starElement.style.setProperty('--unCheckedColor', this.uncheckedcolor);
   }
 
   private generateRating() {
+    if (this.readonly) {
+      return;
+    }
     this.setStars();
-    if (this.value >=0) {
+    if (this.value >= 0) {
       this.mainElement.nativeElement.title = this.value;
 
-      let hasDecimals: boolean = 
+      let hasDecimals: boolean =
         ((Number.parseFloat(this.value.toString()) % 1)
           .toString()
           .substring(3, 2)) ? true : false;

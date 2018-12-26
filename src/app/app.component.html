@@ -1,34 +1,3 @@
-<!-- <table>
-    <tr>
-        <td>
-            <star-rating id="starrating1" value="5" checkedcolor="red" bordercolor="blue" radius="5" canvaswidth="100"
-                canvasheight="20">
-            </star-rating>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <star-rating id="starrating2" value="2" checkedcolor="orange" bordercolor="orange" radius="5" canvaswidth="100"
-                canvasheight="20">
-            </star-rating>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <star-rating id="starrating3" value="3" checkedcolor="red" bordercolor="red" radius="5" canvaswidth="100"
-                canvasheight="20">
-            </star-rating>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <star-rating id="starrating4" value="4" checkedcolor="pink" bordercolor="pink" radius="5" canvaswidth="100"
-                canvasheight="20" uncheckedcolor="purple">
-            </star-rating>
-        </td>
-    </tr>
-</table> -->
-
 <table>
     <thead>
         <tr>
@@ -42,34 +11,38 @@
                 Rating Value
             </th>
             <th>
-                Star Rating
+                Size
             </th>
             <th>
-                Size
+                Read Only
+            </th>
+            <th>
+                Star Rating
             </th>
         </tr>
     </thead>
     <tbody>
-        <tr>
+        <tr *ngFor="let element of starRatingElements">
             <td>
-                <input type="text" [(ngModel)]="checkedColor">
+                <input type="text" [(ngModel)]="element.checkedcolor" value="{{element.checkedcolor}}">
             </td>
             <td>
-                <input type="text" [(ngModel)]="unCheckedColor">
+                <input type="text" [(ngModel)]="element.uncheckedcolor" value="{{element.uncheckedcolor}}">
             </td>
             <td>
-                <input type="number" [(ngModel)]="value" value="{{value}}">
+                <input type="number" [(ngModel)]="element.value" [(value)]="starrating.value">
             </td>
             <td>
-                <input type="number" [(ngModel)]="size" value="{{size}}">
+                <input type="number" [(ngModel)]="element.size" value="{{element.size}}">
             </td>
             <td>
-                <star-rating id="starrating1" #starRating></star-rating>
+                <input type="checkbox" [(ngModel)]="element.readonly" value="{{element.readonly}}">
+            </td>
+            <td>
+                <star-rating [(value)]="element.value" checkedcolor="{{element.checkedcolor}}" 
+                    uncheckedcolor="{{element.uncheckedcolor}}"
+                    size="{{element.size}}px" readonly={{element.readonly}} #starrating></star-rating>
             </td>
         </tr>
     </tbody>
 </table>
-<!-- <star-rating id="starrating1" value="5" checkedColor="gold" unCheckedColor="gray" #starRating>
-</star-rating> -->
-<!-- <star-rating id="starrating2" value="3.5" checkedcolor="red" uncheckedcolor="gray" size="20">
-</star-rating> -->

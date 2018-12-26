@@ -1,9 +1,25 @@
 {
-  "name": "ng-rating",
-  "version": "0.0.1",
+  "name": "ng-starrating",
+  "version": "1.0.1",
+  "description": "Star Rating Library using Angular",
   "peerDependencies": {
     "@angular/common": "^6.0.0-rc.0 || ^6.0.0",
     "@angular/core": "^6.0.0-rc.0 || ^6.0.0"
   },
-  "dependencies": {}
+  "dependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/riteshgandhi/ng-star-rating"
+  },
+  "keywords": [
+    "star",
+    "rating",
+    "starrating",
+    "angular rating"
+  ],
+  "author": "Ritesh Gandhi",
+  "contributors": [
+    "Ritesh Gandhi <ritesh.j.gandhi@gmail.com> (https://github.com/riteshgandhi)"
+  ],
+  "license": "MIT"
 }
