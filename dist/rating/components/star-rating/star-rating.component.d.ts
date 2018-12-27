@@ -1,0 +1,37 @@
+export declare class StarRatingComponent {
+    private stars;
+    private _checkedColor;
+    private _unCheckedColor;
+    private _value;
+    private _size;
+    private _readOnly;
+    private onValueChange;
+    private onCheckedColorChange;
+    private onUnCheckedColorChange;
+    private onSizeChange;
+    private onReadOnlyChange;
+    private mainElement;
+    private star1Element;
+    private star2Element;
+    private star3Element;
+    private star4Element;
+    private star5Element;
+    constructor();
+    checkedcolor: string;
+    uncheckedcolor: string;
+    value: number;
+    size: string;
+    readonly: boolean;
+    private makeEditable;
+    private makeReadOnly;
+    private addRemoveEvents;
+    private ngAfterViewInit;
+    private rate;
+    private setStars;
+    private applySizeAllStars;
+    private applyColorStyleAllStars;
+    private applyColorStyle;
+    private applyCheckedColorStyle;
+    private applyUnCheckedColorStyle;
+    private generateRating;
+}

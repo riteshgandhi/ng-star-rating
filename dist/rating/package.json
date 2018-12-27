@@ -1,0 +1,46 @@
+{
+  "name": "ng-starrating",
+  "version": "1.0.2",
+  "description": "Star Rating Library using Angular",
+  "peerDependencies": {
+    "@angular/common": "^6.0.0-rc.0 || ^6.0.0",
+    "@angular/core": "^6.0.0-rc.0 || ^6.0.0"
+  },
+  "dependencies": {
+    "tslib": "^1.9.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/riteshgandhi/ng-star-rating"
+  },
+  "keywords": [
+    "star",
+    "rating",
+    "starrating",
+    "angular rating",
+    "css-star-rating",
+    "css-rating",
+    "cssonly-rating",
+    "css-only-rating",
+    "ng-rating",
+    "star-rating",
+    "fast-rating",
+    "responsive-rating",
+    "responsive-star-rating"
+  ],
+  "author": "Ritesh Gandhi",
+  "contributors": [
+    "Ritesh Gandhi <ritesh.j.gandhi@gmail.com> (https://github.com/riteshgandhi)"
+  ],
+  "license": "MIT",
+  "main": "bundles/ng-starrating.umd.js",
+  "module": "fesm5/ng-starrating.js",
+  "es2015": "fesm2015/ng-starrating.js",
+  "esm5": "esm5/ng-starrating.js",
+  "esm2015": "esm2015/ng-starrating.js",
+  "fesm5": "fesm5/ng-starrating.js",
+  "fesm2015": "fesm2015/ng-starrating.js",
+  "typings": "ng-starrating.d.ts",
+  "metadata": "ng-starrating.metadata.json",
+  "sideEffects": false
+}
