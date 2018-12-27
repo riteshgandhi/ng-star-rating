@@ -9,7 +9,7 @@ import { ratingElement } from '../app/ratingElement';
 
 export class AppComponent {
   title = 'rg-rating';
-  private starRatingElements:Array<ratingElement> = [];
+  public starRatingElements:Array<ratingElement> = [];
 
   constructor() { }
 
