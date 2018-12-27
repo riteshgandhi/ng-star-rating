@@ -3,7 +3,7 @@
 [![npm version]](https://www.npmjs.com/package/ng-starrating/v/1.0.2)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/riteshgandhi/ng-star-rating)
 
-Highly Customizable and Responsive Star Rating built using Angular.
+Highly Customizable and Responsive Star Rating Library built using Angular.
 
 For production, use the files from the `dist/` folder.
 
