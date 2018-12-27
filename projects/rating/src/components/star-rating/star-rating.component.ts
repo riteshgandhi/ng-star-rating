@@ -53,7 +53,7 @@ export class StarRatingComponent {
   private _unCheckedColor: string;
   private _value: number;
   private _size: string;
-  private _readOnly: boolean;
+  private _readOnly: boolean = false;
 
   private onValueChange: Subject<number>;
   private onCheckedColorChange: Subject<string>;
@@ -119,7 +119,7 @@ export class StarRatingComponent {
   }
 
   get size(): string {
-    return this._size;
+    return this._size.concat((!this._size.includes("px") ? "px" : ""));
   }
 
   get readonly(): boolean {
