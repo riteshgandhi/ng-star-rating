@@ -1,11 +1,13 @@
 # ng-starrating
 
-[![npm version](https://img.shields.io/badge/npm-v1.0.3-brightgreen.svg)](https://www.npmjs.com/package/ng-starrating/v/1.0.3)
+[![npm version](https://img.shields.io/badge/npm-v1.0.4-brightgreen.svg)](https://www.npmjs.com/package/ng-starrating/v/1.0.4)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/riteshgandhi/ng-star-rating)
 
 Simple, highly Customizable and Responsive Star Rating Library built using Angular.
 
 For production, use the files from the `dist/` folder.
+
+[Demo](https://angular-smk2vr.stackblitz.io/)
 
 ## Why it's better
 
@@ -105,6 +107,9 @@ Star Rating uses [npm](https://www.npmjs.com/get-npm) to manage package dependen
 All changes should be committed to the files in `src/`.
 
 ## Changelog
+
+`v1.0.4 - [2018-12-26]`
+- Added demo site
 
 `v1.0.3 - [2018-12-26]`
 - Removed unwanted packages and updated readme file

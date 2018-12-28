@@ -1,6 +1,6 @@
 {
   "name": "ng-starrating",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Star Rating Library using Angular",
   "peerDependencies": {
     "@angular/common": "^6.0.0-rc.0 || ^6.0.0",
