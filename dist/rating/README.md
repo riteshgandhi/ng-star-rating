@@ -1,11 +1,18 @@
 # ng-starrating
 
-[![npm version]](https://www.npmjs.com/package/ng-starrating/v/1.0.2)
+[![npm version](https://img.shields.io/badge/npm-v1.0.3-brightgreen.svg)](https://www.npmjs.com/package/ng-starrating/v/1.0.3)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/riteshgandhi/ng-star-rating)
 
-Highly Customizable and Responsive Star Rating built using Angular.
+Simple, highly Customizable and Responsive Star Rating Library built using Angular.
 
 For production, use the files from the `dist/` folder.
+
+## Why it's better
+
+ - Customizable
+ - Light weight. Built using CSS only
+ - Responsive
+
 
 ## Installation
 
@@ -15,6 +22,22 @@ Use one of the following methods to add the Star Rating library to your project:
 - `npm install ng-starrating`
 
 ## Usage
+
+```TypeScript
+//app.module.ts
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+import { RatingModule } from 'ng-starrating';
+import { AppComponent } from './app.component';
+
+@NgModule({
+  declarations: [ AppComponent ],
+  imports: [ BrowserModule, RatingModule ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+```
 
 ```html
 <div style="text-align:center">
@@ -82,6 +105,9 @@ Star Rating uses [npm](https://www.npmjs.com/get-npm) to manage package dependen
 All changes should be committed to the files in `src/`.
 
 ## Changelog
+
+`v1.0.3 - [2018-12-26]`
+- Removed unwanted packages and updated readme file
 
 `v1.0.2 - [2018-12-26]`
 - Minor fixes

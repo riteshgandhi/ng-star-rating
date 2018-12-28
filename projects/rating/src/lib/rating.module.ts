@@ -12,7 +12,7 @@ import { StarRatingComponent } from '../components/star-rating/star-rating.compo
   declarations: [
     RatingComponent, 
     StarRatingComponent],
-  exports: [StarRatingComponent]
-  //entryComponents: [StarRatingComponent]
+  exports: [StarRatingComponent],
+  entryComponents: [StarRatingComponent]
 })
-export class RatingModule { }
+export class RatingModule { ngDoBootstrap() {} }
