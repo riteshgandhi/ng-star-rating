@@ -5,11 +5,11 @@ import { Subject } from 'rxjs';
   selector: 'star-rating',
   template: `
   <div #starMain>
-    <span data-index="1" #star1></span>
-    <span data-index="2" #star2></span>
-    <span data-index="3" #star3></span>
-    <span data-index="4" #star4></span>
-    <span data-index="5" #star5></span>
+    <span data-index="1" title="1" #star1></span>
+    <span data-index="2" title="2" #star2></span>
+    <span data-index="3" title="3" #star3></span>
+    <span data-index="4" title="4" #star4></span>
+    <span data-index="5" title="5" #star5></span>
   </div>
   <style>
     :root {
@@ -48,7 +48,7 @@ import { Subject } from 'rxjs';
 })
 
 export class StarRatingComponent {
-  private stars = [];
+  private stars: Array<ElementRef> = [];
   private _checkedColor: string;
   private _unCheckedColor: string;
   private _value: number;
@@ -60,6 +60,20 @@ export class StarRatingComponent {
   private onUnCheckedColorChange: Subject<string>;
   private onSizeChange: Subject<string>;
   private onReadOnlyChange: Subject<boolean>;
+
+  private static readonly VAR_CHECKED_COLOR: string = '--checkedColor';
+  private static readonly VAR_UNCHECKED_COLOR: string = '--unCheckedColor';
+  private static readonly VAR_SIZE: string = '--size';
+  private static readonly VAR_HALF_WIDTH: string = '--halfWidth';
+  private static readonly VAR_HALF_MARGIN: string = '--halfMargin';
+  private static readonly CLS_CHECKED_STAR: string = 'on';
+  private static readonly CLS_DEFAULT_STAR: string = 'star';
+  private static readonly CLS_HALF_STAR: string = 'half';
+  private static readonly INP_CHECKED_COLOR: string = 'checkedcolor';
+  private static readonly INP_UNCHECKED_COLOR: string = 'uncheckedcolor';
+  private static readonly INP_VALUE: string = 'value';
+  private static readonly INP_SIZE: string = 'size';
+  private static readonly INP_READONLY: string = 'readonly';
 
   @ViewChild('starMain') private mainElement: ElementRef;
   @ViewChild('star1') private star1Element: ElementRef;
@@ -126,21 +140,21 @@ export class StarRatingComponent {
     return String(this._readOnly) === "true";
   }
 
-  @Input('checkedcolor') set checkedcolor(value: string) {
+  @Input(StarRatingComponent.INP_CHECKED_COLOR) set checkedcolor(value: string) {
     this._checkedColor = value;
     if (this._checkedColor) {
       this.onCheckedColorChange.next(this._checkedColor);
     }
   }
 
-  @Input('uncheckedcolor') set uncheckedcolor(value: string) {
+  @Input(StarRatingComponent.INP_UNCHECKED_COLOR) set uncheckedcolor(value: string) {
     this._unCheckedColor = value;
     if (this._unCheckedColor) {
       this.onUnCheckedColorChange.next(this._unCheckedColor);
     }
   }
 
-  @Input('value') set value(value: number) {
+  @Input(StarRatingComponent.INP_VALUE) set value(value: number) {
     if (!value || value == null) {
       value = 0;
     }
@@ -156,7 +170,7 @@ export class StarRatingComponent {
     }
   }
 
-  @Input('size') set size(value: string) {
+  @Input(StarRatingComponent.INP_SIZE) set size(value: string) {
     if (!value || value == null || value == "0px") {
       value = "24px";
     }
@@ -164,22 +178,32 @@ export class StarRatingComponent {
     this.onSizeChange.next(this._size);
   }
 
-  @Input('readonly') set readonly(value: boolean) {
+  @Input(StarRatingComponent.INP_READONLY) set readonly(value: boolean) {
     this._readOnly = value;
     this.onReadOnlyChange.next(value);
   }
 
   private makeEditable() {
-    this.stars.forEach(star => {
+    this.mainElement.nativeElement.addEventListener('mouseleave', this.offStar.bind(this));
+    this.mainElement.nativeElement.style.cursor = "pointer";
+    this.mainElement.nativeElement.title = this.value;
+    this.stars.forEach((star: ElementRef) => {
       star.nativeElement.addEventListener('click', this.rate.bind(this));
-      star.nativeElement.addEventListener('mouseover', this.rate.bind(this));
+      star.nativeElement.addEventListener('mouseenter', this.onStar.bind(this));
+      star.nativeElement.style.cursor = "pointer";
+      star.nativeElement.title = star.nativeElement.dataset.index;
     });
   }
 
   private makeReadOnly() {
-    this.stars.forEach((star:ElementRef) => {
+    this.mainElement.nativeElement.__zone_symbol__mouseleavefalse = null;
+    this.mainElement.nativeElement.style.cursor = "default";
+    this.mainElement.nativeElement.title = this.value;
+    this.stars.forEach((star: ElementRef) => {
       star.nativeElement.__zone_symbol__clickfalse = null;
-      star.nativeElement.__zone_symbol__mouseoverfalse = null;
+      star.nativeElement.__zone_symbol__mouseenterfalse = null;
+      star.nativeElement.style.cursor = "default";
+      star.nativeElement.title = "";
     });
   }
 
@@ -195,12 +219,44 @@ export class StarRatingComponent {
   private ngAfterViewInit() {
   }
 
-  private rate(event:MouseEvent) {
-    let star:HTMLElement = <HTMLElement> event.srcElement;
+  private rate(event: MouseEvent) {
+    let star: HTMLElement = <HTMLElement>event.srcElement;
     this.value = parseInt(star.dataset.index);
     if (this.value == 0) {
       this.value = 1;
     }
+  }
+
+  private onStar(event: MouseEvent) {
+    let star: HTMLElement = <HTMLElement>event.srcElement;
+    let currentIndex = parseInt(star.dataset.index);
+
+    for (let index = 0; index < currentIndex; index++) {
+      this.stars[index].nativeElement.classList = [];
+      this.addDefaultClass(this.stars[index].nativeElement);
+      this.addCheckedStarClass(this.stars[index].nativeElement);
+    }
+
+    for (let index = currentIndex; index < this.stars.length; index++) {
+      this.stars[index].nativeElement.classList = [];
+      this.addDefaultClass(this.stars[index].nativeElement);
+    }
+  }
+
+  private offStar(event: MouseEvent) {
+    this.generateRating();
+  }
+
+  private addDefaultClass(star: HTMLSpanElement) {
+    star.classList.add(StarRatingComponent.CLS_DEFAULT_STAR);
+  }
+
+  private addCheckedStarClass(star: HTMLSpanElement) {
+    star.classList.add(StarRatingComponent.CLS_CHECKED_STAR);
+  }
+
+  private addHalfStarClass(star: HTMLSpanElement) {
+    star.classList.add(StarRatingComponent.CLS_HALF_STAR);
   }
 
   private setStars() {
@@ -215,21 +271,21 @@ export class StarRatingComponent {
 
   private applySizeAllStars() {
     if (this._size) {
-      this.stars.forEach((star:ElementRef) => {
+      this.stars.forEach((star: ElementRef) => {
         let newSize = this.size.match(/\d+/)[0];
         let halfSize = (parseInt(newSize) * 10) / 24;
         let halfMargin = 0 - ((parseInt(newSize) * 20) / 24);
-        star.nativeElement.style.setProperty('--size', this.size);
-        if (star.nativeElement.classList.contains("half")) {
-          star.nativeElement.style.setProperty('--halfWidth', `${halfSize}px`);
-          star.nativeElement.style.setProperty('--halfMargin', `${halfMargin}px`);
+        star.nativeElement.style.setProperty(StarRatingComponent.VAR_SIZE, this.size);
+        if (star.nativeElement.classList.contains(StarRatingComponent.CLS_HALF_STAR)) {
+          star.nativeElement.style.setProperty(StarRatingComponent.VAR_HALF_WIDTH, `${halfSize}px`);
+          star.nativeElement.style.setProperty(StarRatingComponent.VAR_HALF_MARGIN, `${halfMargin}px`);
         }
       });
     }
   }
 
   private applyColorStyleAllStars(setChecked: boolean) {
-    this.stars.forEach(star => {
+    this.stars.forEach((star: ElementRef) => {
       if (setChecked) {
         this.applyCheckedColorStyle(star.nativeElement);
       } else {
@@ -244,11 +300,11 @@ export class StarRatingComponent {
   }
 
   private applyCheckedColorStyle(starElement: HTMLSpanElement) {
-    starElement.style.setProperty('--checkedColor', this.checkedcolor);
+    starElement.style.setProperty(StarRatingComponent.VAR_CHECKED_COLOR, this.checkedcolor);
   }
 
   private applyUnCheckedColorStyle(starElement: HTMLSpanElement) {
-    starElement.style.setProperty('--unCheckedColor', this.uncheckedcolor);
+    starElement.style.setProperty(StarRatingComponent.VAR_UNCHECKED_COLOR, this.uncheckedcolor);
   }
 
   private generateRating() {
@@ -265,18 +321,18 @@ export class StarRatingComponent {
           .substring(3, 2)) ? true : false;
 
       let i = 1;
-      this.stars.forEach(star => {
+      this.stars.forEach((star: ElementRef) => {
         star.nativeElement.classList = [];
         this.applyColorStyle(star.nativeElement);
-        star.nativeElement.classList.add("star");
+        this.addDefaultClass(star.nativeElement);
 
         if (this.value >= i) {
           // star on
-          star.nativeElement.classList.add("on");
+          this.addCheckedStarClass(star.nativeElement);
         } else {
-          // hald star
+          // half star
           if (hasDecimals) {
-            star.nativeElement.classList.add("half");
+            this.addHalfStarClass(star.nativeElement);
             hasDecimals = false;
           }
         }

@@ -158,9 +158,14 @@ class StarRatingComponent {
      * @return {?}
      */
     makeEditable() {
-        this.stars.forEach(star => {
+        this.mainElement.nativeElement.addEventListener('mouseleave', this.offStar.bind(this));
+        this.mainElement.nativeElement.style.cursor = "pointer";
+        this.mainElement.nativeElement.title = this.value;
+        this.stars.forEach((star) => {
             star.nativeElement.addEventListener('click', this.rate.bind(this));
-            star.nativeElement.addEventListener('mouseover', this.rate.bind(this));
+            star.nativeElement.addEventListener('mouseenter', this.onStar.bind(this));
+            star.nativeElement.style.cursor = "pointer";
+            star.nativeElement.title = star.nativeElement.dataset.index;
         });
     }
     /**
@@ -168,9 +173,14 @@ class StarRatingComponent {
      * @return {?}
      */
     makeReadOnly() {
+        this.mainElement.nativeElement.__zone_symbol__mouseleavefalse = null;
+        this.mainElement.nativeElement.style.cursor = "default";
+        this.mainElement.nativeElement.title = this.value;
         this.stars.forEach((star) => {
             star.nativeElement.__zone_symbol__clickfalse = null;
-            star.nativeElement.__zone_symbol__mouseoverfalse = null;
+            star.nativeElement.__zone_symbol__mouseenterfalse = null;
+            star.nativeElement.style.cursor = "default";
+            star.nativeElement.title = "";
         });
     }
     /**
@@ -207,6 +217,58 @@ class StarRatingComponent {
     }
     /**
      * @private
+     * @param {?} event
+     * @return {?}
+     */
+    onStar(event) {
+        /** @type {?} */
+        let star = (/** @type {?} */ (event.srcElement));
+        /** @type {?} */
+        let currentIndex = parseInt(star.dataset.index);
+        for (let index = 0; index < currentIndex; index++) {
+            this.stars[index].nativeElement.classList = [];
+            this.addDefaultClass(this.stars[index].nativeElement);
+            this.addCheckedStarClass(this.stars[index].nativeElement);
+        }
+        for (let index = currentIndex; index < this.stars.length; index++) {
+            this.stars[index].nativeElement.classList = [];
+            this.addDefaultClass(this.stars[index].nativeElement);
+        }
+    }
+    /**
+     * @private
+     * @param {?} event
+     * @return {?}
+     */
+    offStar(event) {
+        this.generateRating();
+    }
+    /**
+     * @private
+     * @param {?} star
+     * @return {?}
+     */
+    addDefaultClass(star) {
+        star.classList.add(StarRatingComponent.CLS_DEFAULT_STAR);
+    }
+    /**
+     * @private
+     * @param {?} star
+     * @return {?}
+     */
+    addCheckedStarClass(star) {
+        star.classList.add(StarRatingComponent.CLS_CHECKED_STAR);
+    }
+    /**
+     * @private
+     * @param {?} star
+     * @return {?}
+     */
+    addHalfStarClass(star) {
+        star.classList.add(StarRatingComponent.CLS_HALF_STAR);
+    }
+    /**
+     * @private
      * @return {?}
      */
     setStars() {
@@ -231,10 +293,10 @@ class StarRatingComponent {
                 let halfSize = (parseInt(newSize) * 10) / 24;
                 /** @type {?} */
                 let halfMargin = 0 - ((parseInt(newSize) * 20) / 24);
-                star.nativeElement.style.setProperty('--size', this.size);
-                if (star.nativeElement.classList.contains("half")) {
-                    star.nativeElement.style.setProperty('--halfWidth', `${halfSize}px`);
-                    star.nativeElement.style.setProperty('--halfMargin', `${halfMargin}px`);
+                star.nativeElement.style.setProperty(StarRatingComponent.VAR_SIZE, this.size);
+                if (star.nativeElement.classList.contains(StarRatingComponent.CLS_HALF_STAR)) {
+                    star.nativeElement.style.setProperty(StarRatingComponent.VAR_HALF_WIDTH, `${halfSize}px`);
+                    star.nativeElement.style.setProperty(StarRatingComponent.VAR_HALF_MARGIN, `${halfMargin}px`);
                 }
             });
         }
@@ -245,7 +307,7 @@ class StarRatingComponent {
      * @return {?}
      */
     applyColorStyleAllStars(setChecked) {
-        this.stars.forEach(star => {
+        this.stars.forEach((star) => {
             if (setChecked) {
                 this.applyCheckedColorStyle(star.nativeElement);
             }
@@ -269,7 +331,7 @@ class StarRatingComponent {
      * @return {?}
      */
     applyCheckedColorStyle(starElement) {
-        starElement.style.setProperty('--checkedColor', this.checkedcolor);
+        starElement.style.setProperty(StarRatingComponent.VAR_CHECKED_COLOR, this.checkedcolor);
     }
     /**
      * @private
@@ -277,7 +339,7 @@ class StarRatingComponent {
      * @return {?}
      */
     applyUnCheckedColorStyle(starElement) {
-        starElement.style.setProperty('--unCheckedColor', this.uncheckedcolor);
+        starElement.style.setProperty(StarRatingComponent.VAR_UNCHECKED_COLOR, this.uncheckedcolor);
     }
     /**
      * @private
@@ -296,18 +358,18 @@ class StarRatingComponent {
                 .substring(3, 2)) ? true : false;
             /** @type {?} */
             let i = 1;
-            this.stars.forEach(star => {
+            this.stars.forEach((star) => {
                 star.nativeElement.classList = [];
                 this.applyColorStyle(star.nativeElement);
-                star.nativeElement.classList.add("star");
+                this.addDefaultClass(star.nativeElement);
                 if (this.value >= i) {
                     // star on
-                    star.nativeElement.classList.add("on");
+                    this.addCheckedStarClass(star.nativeElement);
                 }
                 else {
-                    // hald star
+                    // half star
                     if (hasDecimals) {
-                        star.nativeElement.classList.add("half");
+                        this.addHalfStarClass(star.nativeElement);
                         hasDecimals = false;
                     }
                 }
@@ -316,16 +378,29 @@ class StarRatingComponent {
         }
     }
 }
+StarRatingComponent.VAR_CHECKED_COLOR = '--checkedColor';
+StarRatingComponent.VAR_UNCHECKED_COLOR = '--unCheckedColor';
+StarRatingComponent.VAR_SIZE = '--size';
+StarRatingComponent.VAR_HALF_WIDTH = '--halfWidth';
+StarRatingComponent.VAR_HALF_MARGIN = '--halfMargin';
+StarRatingComponent.CLS_CHECKED_STAR = 'on';
+StarRatingComponent.CLS_DEFAULT_STAR = 'star';
+StarRatingComponent.CLS_HALF_STAR = 'half';
+StarRatingComponent.INP_CHECKED_COLOR = 'checkedcolor';
+StarRatingComponent.INP_UNCHECKED_COLOR = 'uncheckedcolor';
+StarRatingComponent.INP_VALUE = 'value';
+StarRatingComponent.INP_SIZE = 'size';
+StarRatingComponent.INP_READONLY = 'readonly';
 StarRatingComponent.decorators = [
     { type: Component, args: [{
                 selector: 'star-rating',
                 template: `
   <div #starMain>
-    <span data-index="1" #star1></span>
-    <span data-index="2" #star2></span>
-    <span data-index="3" #star3></span>
-    <span data-index="4" #star4></span>
-    <span data-index="5" #star5></span>
+    <span data-index="1" title="1" #star1></span>
+    <span data-index="2" title="2" #star2></span>
+    <span data-index="3" title="3" #star3></span>
+    <span data-index="4" title="4" #star4></span>
+    <span data-index="5" title="5" #star5></span>
   </div>
   <style>
     :root {
@@ -371,11 +446,11 @@ StarRatingComponent.propDecorators = {
     star3Element: [{ type: ViewChild, args: ['star3',] }],
     star4Element: [{ type: ViewChild, args: ['star4',] }],
     star5Element: [{ type: ViewChild, args: ['star5',] }],
-    checkedcolor: [{ type: Input, args: ['checkedcolor',] }],
-    uncheckedcolor: [{ type: Input, args: ['uncheckedcolor',] }],
-    value: [{ type: Input, args: ['value',] }],
-    size: [{ type: Input, args: ['size',] }],
-    readonly: [{ type: Input, args: ['readonly',] }]
+    checkedcolor: [{ type: Input, args: [StarRatingComponent.INP_CHECKED_COLOR,] }],
+    uncheckedcolor: [{ type: Input, args: [StarRatingComponent.INP_UNCHECKED_COLOR,] }],
+    value: [{ type: Input, args: [StarRatingComponent.INP_VALUE,] }],
+    size: [{ type: Input, args: [StarRatingComponent.INP_SIZE,] }],
+    readonly: [{ type: Input, args: [StarRatingComponent.INP_READONLY,] }]
 };
 
 /**

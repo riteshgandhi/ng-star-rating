@@ -1,6 +1,6 @@
 # ng-starrating
 
-[![npm version](https://img.shields.io/badge/npm-v1.0.4-brightgreen.svg)](https://www.npmjs.com/package/ng-starrating/v/1.0.4)
+[![npm version](https://img.shields.io/badge/npm-v1.0.5-brightgreen.svg)](https://www.npmjs.com/package/ng-starrating/v/1.0.5)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/riteshgandhi/ng-star-rating)
 
 Simple, highly Customizable and Responsive Star Rating Library built using Angular.
@@ -11,7 +11,7 @@ For production, use the files from the `dist/` folder.
 
 ## Why it's better
 
- - Customizable
+ - Simple and customizable
  - Light weight. Built using CSS only
  - Responsive
 
@@ -55,7 +55,6 @@ export class AppModule { }
 Here are the default options
 
 ```html
-
 checkedcolor: "gold",
 uncheckedcolor: "gray",
 size: "24px",
@@ -107,6 +106,9 @@ Star Rating uses [npm](https://www.npmjs.com/get-npm) to manage package dependen
 All changes should be committed to the files in `src/`.
 
 ## Changelog
+
+`v1.0.5 - [2018-12-31]`
+- Rating can now be only changed by clicking on the star or by manually setting the value property. Mouse hover won't change the rating
 
 `v1.0.4 - [2018-12-26]`
 - Added demo site
