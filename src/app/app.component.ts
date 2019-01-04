@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ratingElement } from '../app/ratingElement';
+import { StarRatingComponent } from 'ng-starrating';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +10,7 @@ import { ratingElement } from '../app/ratingElement';
 
 export class AppComponent {
   title = 'rg-rating';
-  public starRatingElements:Array<ratingElement> = [];
+  public starRatingElements: Array<ratingElement> = [];
 
   constructor() { }
 
@@ -54,5 +55,9 @@ export class AppComponent {
     this.starRatingElements.push(ratingElement3);
     this.starRatingElements.push(ratingElement4);
     this.starRatingElements.push(ratingElement5);
+  }
+
+  onRate($event: { oldValue: number, newValue: number, starRating: StarRatingComponent }) {
+    alert(`Old Value:${$event.oldValue}, New Value: ${$event.newValue}, Checked Color: ${$event.starRating.checkedcolor}, Unchecked Color: ${$event.starRating.uncheckedcolor}`);
   }
 }

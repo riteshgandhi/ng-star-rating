@@ -1,6 +1,6 @@
 # ng-starrating
 
-[![npm version](https://img.shields.io/badge/npm-v1.0.5-brightgreen.svg)](https://www.npmjs.com/package/ng-starrating/v/1.0.5)
+[![npm version](https://img.shields.io/badge/npm-v1.0.6-brightgreen.svg)](https://www.npmjs.com/package/ng-starrating/v/1.0.6)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/riteshgandhi/ng-star-rating)
 
 Simple, highly Customizable and Responsive Star Rating Library built using Angular.
@@ -46,8 +46,33 @@ export class AppModule { }
   <h1>
     ng-starrating demo
   </h1>
-  <star-rating value="5" checkedcolor="red" uncheckedcolor="black" size="24px" readonly="false"></star-rating>
+  <star-rating value="5" checkedcolor="red" uncheckedcolor="black" size="24px"    readonly="false" (rate)="onRate($event)"></star-rating>
 </div>
+```
+
+```TypeScript
+//app.components.ts
+import { Component } from '@angular/core';
+import { StarRatingComponent } from 'ng-starrating';
+
+@Component({ 
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+
+export class AppComponent {
+  constructor() { }
+
+  ngOnInit() { }
+
+  onRate($event:{oldValue:number, newValue:number, starRating:StarRatingComponent}) {
+    alert(`Old Value:${$event.oldValue}, 
+      New Value: ${$event.newValue}, 
+      Checked Color: ${$event.starRating.checkedcolor}, 
+      Unchecked Color: ${$event.starRating.uncheckedcolor}`);
+  }
+}
 ```
 
 ## Options
@@ -92,6 +117,13 @@ Type: `Boolean`
 
 Determines whether the star rating component is readonly. 
 
+## Events
+
+### rate:
+
+Type: EventEmitter
+
+Custom Event, triggers on change of rating value. 
 
 ## Build
 
@@ -106,6 +138,9 @@ Star Rating uses [npm](https://www.npmjs.com/get-npm) to manage package dependen
 All changes should be committed to the files in `src/`.
 
 ## Changelog
+
+`v1.0.6 - [2019-01-03]`
+- Added custom event "rate"
 
 `v1.0.5 - [2018-12-31]`
 - Rating can now be only changed by clicking on the star or by manually setting the value property. Mouse hover won't change the rating

@@ -39,9 +39,12 @@
                 <input type="checkbox" [(ngModel)]="element.readonly" value="{{element.readonly}}">
             </td>
             <td>
-                <star-rating [(value)]="element.value" checkedcolor="{{element.checkedcolor}}" 
+                <star-rating [(value)]="element.value" 
+                    checkedcolor="{{element.checkedcolor}}" 
                     uncheckedcolor="{{element.uncheckedcolor}}"
-                    size="{{element.size}}" readonly={{element.readonly}} #starrating></star-rating>
+                    size="{{element.size}}" readonly={{element.readonly}}
+                    (rate)="onRate($event)"
+                    #starrating></star-rating>
             </td>
         </tr>
     </tbody>

@@ -1,3 +1,4 @@
+import { EventEmitter } from '@angular/core';
 export declare class StarRatingComponent {
     private stars;
     private _checkedColor;
@@ -35,11 +36,16 @@ export declare class StarRatingComponent {
     value: number;
     size: string;
     readonly: boolean;
+    rate: EventEmitter<{
+        oldValue: number;
+        newValue: number;
+        starRating: StarRatingComponent;
+    }>;
     private makeEditable;
     private makeReadOnly;
     private addRemoveEvents;
     private ngAfterViewInit;
-    private rate;
+    private onRate;
     private onStar;
     private offStar;
     private addDefaultClass;

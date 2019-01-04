@@ -1,6 +1,6 @@
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { Component, Input, ViewChild, NgModule } from '@angular/core';
+import { Component, Input, Output, ViewChild, EventEmitter, NgModule } from '@angular/core';
 import { Subject } from 'rxjs';
 
 /**
@@ -38,6 +38,7 @@ var StarRatingComponent = /** @class */ (function () {
         var _this = this;
         this.stars = [];
         this._readOnly = false;
+        this.rate = new EventEmitter();
         if (!this.onValueChange) {
             this.onValueChange = new Subject();
             this.onValueChange.subscribe(function () {
@@ -189,7 +190,7 @@ var StarRatingComponent = /** @class */ (function () {
         this.mainElement.nativeElement.style.cursor = "pointer";
         this.mainElement.nativeElement.title = this.value;
         this.stars.forEach(function (star) {
-            star.nativeElement.addEventListener('click', _this.rate.bind(_this));
+            star.nativeElement.addEventListener('click', _this.onRate.bind(_this));
             star.nativeElement.addEventListener('mouseenter', _this.onStar.bind(_this));
             star.nativeElement.style.cursor = "pointer";
             star.nativeElement.title = star.nativeElement.dataset.index;
@@ -246,7 +247,7 @@ var StarRatingComponent = /** @class */ (function () {
      * @param {?} event
      * @return {?}
      */
-    StarRatingComponent.prototype.rate = /**
+    StarRatingComponent.prototype.onRate = /**
      * @private
      * @param {?} event
      * @return {?}
@@ -254,10 +255,15 @@ var StarRatingComponent = /** @class */ (function () {
     function (event) {
         /** @type {?} */
         var star = (/** @type {?} */ (event.srcElement));
+        /** @type {?} */
+        var oldValue = this.value;
         this.value = parseInt(star.dataset.index);
         if (this.value == 0) {
             this.value = 1;
         }
+        /** @type {?} */
+        var rateValues = { oldValue: oldValue, newValue: this.value, starRating: this };
+        this.rate.emit(rateValues);
     };
     /**
      * @private
@@ -508,6 +514,7 @@ var StarRatingComponent = /** @class */ (function () {
         star3Element: [{ type: ViewChild, args: ['star3',] }],
         star4Element: [{ type: ViewChild, args: ['star4',] }],
         star5Element: [{ type: ViewChild, args: ['star5',] }],
+        rate: [{ type: Output }],
         checkedcolor: [{ type: Input, args: [StarRatingComponent.INP_CHECKED_COLOR,] }],
         uncheckedcolor: [{ type: Input, args: [StarRatingComponent.INP_UNCHECKED_COLOR,] }],
         value: [{ type: Input, args: [StarRatingComponent.INP_VALUE,] }],

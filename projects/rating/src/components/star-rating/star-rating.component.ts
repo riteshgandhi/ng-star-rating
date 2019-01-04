@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild, ElementRef } from '@angular/core';
+import { Component, Input, Output, ViewChild, ElementRef, EventEmitter } from '@angular/core';
 import { Subject } from 'rxjs';
 
 @Component({
@@ -140,6 +140,8 @@ export class StarRatingComponent {
     return String(this._readOnly) === "true";
   }
 
+  @Output() rate: EventEmitter<{oldValue:number, newValue:number, starRating:StarRatingComponent}> = new EventEmitter();
+
   @Input(StarRatingComponent.INP_CHECKED_COLOR) set checkedcolor(value: string) {
     this._checkedColor = value;
     if (this._checkedColor) {
@@ -188,7 +190,7 @@ export class StarRatingComponent {
     this.mainElement.nativeElement.style.cursor = "pointer";
     this.mainElement.nativeElement.title = this.value;
     this.stars.forEach((star: ElementRef) => {
-      star.nativeElement.addEventListener('click', this.rate.bind(this));
+      star.nativeElement.addEventListener('click', this.onRate.bind(this));
       star.nativeElement.addEventListener('mouseenter', this.onStar.bind(this));
       star.nativeElement.style.cursor = "pointer";
       star.nativeElement.title = star.nativeElement.dataset.index;
@@ -219,12 +221,15 @@ export class StarRatingComponent {
   private ngAfterViewInit() {
   }
 
-  private rate(event: MouseEvent) {
+  private onRate(event: MouseEvent) {
     let star: HTMLElement = <HTMLElement>event.srcElement;
+    let oldValue = this.value;
     this.value = parseInt(star.dataset.index);
     if (this.value == 0) {
       this.value = 1;
     }
+    let rateValues = {oldValue:oldValue, newValue:this.value, starRating:this};
+    this.rate.emit(rateValues);
   }
 
   private onStar(event: MouseEvent) {
