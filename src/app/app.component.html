@@ -1,44 +1,40 @@
 <table>
     <thead>
         <tr>
-            <th>
-                Checked Color
-            </th>
-            <th>
-                UnChecked Color
-            </th>
-            <th>
-                Rating Value
-            </th>
-            <th>
-                Size
-            </th>
-            <th>
-                Read Only
-            </th>
-            <th>
-                Star Rating
-            </th>
+            <th>Checked Color</th>
+            <th>UnChecked Color</th>
+            <th>Rating Value</th>
+            <th>Size</th>
+            <th>Read Only</th>
+            <th>Star Rating</th>
         </tr>
     </thead>
+    <colgroup>
+        <col span="1">
+        <col span="1">
+        <col span="1">
+        <col span="1">
+        <col span="1">
+        <col span="1">
+    </colgroup>
     <tbody>
         <tr *ngFor="let element of starRatingElements">
-            <td>
+            <td data-th="Checked Color">
                 <input type="text" [(ngModel)]="element.checkedcolor" value="{{element.checkedcolor}}">
             </td>
-            <td>
+            <td data-th="UnChecked Color">
                 <input type="text" [(ngModel)]="element.uncheckedcolor" value="{{element.uncheckedcolor}}">
             </td>
-            <td>
+            <td data-th="Rating Value">
                 <input type="number" [(ngModel)]="element.value" [(value)]="starrating.value">
             </td>
-            <td>
+            <td data-th="Size">
                 <input type="number" [(ngModel)]="element.size" value="{{element.size}}">
             </td>
-            <td>
+            <td data-th="Read Only">
                 <input type="checkbox" [(ngModel)]="element.readonly" value="{{element.readonly}}">
             </td>
-            <td>
+            <td data-th="Star Rating">
                 <star-rating [(value)]="element.value" 
                     checkedcolor="{{element.checkedcolor}}" 
                     uncheckedcolor="{{element.uncheckedcolor}}"

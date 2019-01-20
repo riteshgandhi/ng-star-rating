@@ -1,14 +1,121 @@
 <!doctype html>
 <html lang="en">
+
 <head>
-  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>ng-starrating demo</title>
   <base href="/">
-
-  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    #headline {
+      padding: 0.7em;
+      color: black;
+      font-family: Roboto, helvetica, arial, sans-serif;
+      background-color: white;
+      background-size: cover;
+      text-align: center;
+    }
+
+    #headline h1 {
+      font-weight: 400;
+      font-size: 30px;
+      line-height: 1em;
+      margin-bottom: 0;
+    }
+
+    footer {
+      font-family: Roboto, sans-serif;
+      font-weight: 300;
+      text-align: center;
+      background-color: hsl(8, 70%, 54%);
+      color: white;
+      padding-bottom: 20px;
+      padding-top: 20px;
+    }
+
+    table {
+      margin-top: 26px;
+      width: 100%;
+    }
+
+    thead {
+      font-weight: bold;
+    }
+
+    tbody {
+      text-align: center;
+    }
+
+    input {
+      text-align: center;
+      box-sizing: border-box;
+      width: 50%;
+    }
+
+    @media screen and (max-width: 600px) {
+      .container {
+        margin: auto;
+        max-width: 800px;
+      }
+    }
+
+    @media screen and (max-width: 600px) {
+
+      table thead {
+        display: none;
+      }
+
+      table td {
+        display: block;
+        position: relative;
+        padding-left: 40%;
+        padding-top: 13px;
+        padding-bottom: 13px;
+        text-align: left;
+        background: #e9e9e9;
+      }
+
+      table td:before {
+        content: attr(data-th) " :";
+        display: inline-block;
+        color: #000000;
+        background: #e9e9e9;
+        border-right: 2px solid transparent;
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        width: 33%;
+        max-height: 100%;
+
+        font-size: 16px;
+        font-weight: 300;
+        padding-left: 13px;
+        padding-top: 13px;
+      }
+    }
+  </style>
 </head>
+
 <body>
-  <app-root></app-root>
+  <div id="headline">
+    <div class="container">
+      <header>
+        <h1><a href="https://www.npmjs.com/package/ng-starrating">Star Rating</a> Demo</h1>
+      </header>
+      <app-root></app-root>
+    </div>
+  </div>
+  <footer>
+    <div class="container">
+      ng-starrating demo - by <a href="https://github.com/riteshgandhi">riteshgandhi</a>
+    </div>
+  </footer>
 </body>
+
 </html>
