@@ -1,11 +1,11 @@
+import { Component, EventEmitter, ViewChild, Output, Input, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { Component, Input, Output, ViewChild, EventEmitter, NgModule } from '@angular/core';
 import { Subject } from 'rxjs';
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 //import { StarRatingComponent } from '../components/star-rating/star-rating.component'
 class RatingComponent {
@@ -26,11 +26,12 @@ RatingComponent.decorators = [
   `
             }] }
 ];
+/** @nocollapse */
 RatingComponent.ctorParameters = () => [];
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class StarRatingComponent {
     constructor() {
@@ -39,34 +40,49 @@ class StarRatingComponent {
         this.rate = new EventEmitter();
         if (!this.onValueChange) {
             this.onValueChange = new Subject();
-            this.onValueChange.subscribe(() => {
+            this.onValueChange.subscribe((/**
+             * @return {?}
+             */
+            () => {
                 this.generateRating();
                 this.applySizeAllStars();
-            });
+            }));
         }
         if (!this.onCheckedColorChange) {
             this.onCheckedColorChange = new Subject();
-            this.onCheckedColorChange.subscribe(() => {
+            this.onCheckedColorChange.subscribe((/**
+             * @return {?}
+             */
+            () => {
                 this.applyColorStyleAllStars(true);
-            });
+            }));
         }
         if (!this.onUnCheckedColorChange) {
             this.onUnCheckedColorChange = new Subject();
-            this.onUnCheckedColorChange.subscribe(() => {
+            this.onUnCheckedColorChange.subscribe((/**
+             * @return {?}
+             */
+            () => {
                 this.applyColorStyleAllStars(false);
-            });
+            }));
         }
         if (!this.onSizeChange) {
             this.onSizeChange = new Subject();
-            this.onSizeChange.subscribe(() => {
+            this.onSizeChange.subscribe((/**
+             * @return {?}
+             */
+            () => {
                 this.applySizeAllStars();
-            });
+            }));
         }
         if (!this.onReadOnlyChange) {
             this.onReadOnlyChange = new Subject();
-            this.onReadOnlyChange.subscribe(() => {
+            this.onReadOnlyChange.subscribe((/**
+             * @return {?}
+             */
+            () => {
                 this.addRemoveEvents();
-            });
+            }));
         }
     }
     /**
@@ -162,12 +178,16 @@ class StarRatingComponent {
         this.mainElement.nativeElement.addEventListener('mouseleave', this.offStar.bind(this));
         this.mainElement.nativeElement.style.cursor = "pointer";
         this.mainElement.nativeElement.title = this.value;
-        this.stars.forEach((star) => {
+        this.stars.forEach((/**
+         * @param {?} star
+         * @return {?}
+         */
+        (star) => {
             star.nativeElement.addEventListener('click', this.onRate.bind(this));
             star.nativeElement.addEventListener('mouseenter', this.onStar.bind(this));
             star.nativeElement.style.cursor = "pointer";
             star.nativeElement.title = star.nativeElement.dataset.index;
-        });
+        }));
     }
     /**
      * @private
@@ -177,12 +197,16 @@ class StarRatingComponent {
         this.mainElement.nativeElement.__zone_symbol__mouseleavefalse = null;
         this.mainElement.nativeElement.style.cursor = "default";
         this.mainElement.nativeElement.title = this.value;
-        this.stars.forEach((star) => {
+        this.stars.forEach((/**
+         * @param {?} star
+         * @return {?}
+         */
+        (star) => {
             star.nativeElement.__zone_symbol__clickfalse = null;
             star.nativeElement.__zone_symbol__mouseenterfalse = null;
             star.nativeElement.style.cursor = "default";
             star.nativeElement.title = "";
-        });
+        }));
     }
     /**
      * @private
@@ -292,7 +316,11 @@ class StarRatingComponent {
      */
     applySizeAllStars() {
         if (this._size) {
-            this.stars.forEach((star) => {
+            this.stars.forEach((/**
+             * @param {?} star
+             * @return {?}
+             */
+            (star) => {
                 /** @type {?} */
                 let newSize = this.size.match(/\d+/)[0];
                 /** @type {?} */
@@ -304,7 +332,7 @@ class StarRatingComponent {
                     star.nativeElement.style.setProperty(StarRatingComponent.VAR_HALF_WIDTH, `${halfSize}px`);
                     star.nativeElement.style.setProperty(StarRatingComponent.VAR_HALF_MARGIN, `${halfMargin}px`);
                 }
-            });
+            }));
         }
     }
     /**
@@ -313,14 +341,18 @@ class StarRatingComponent {
      * @return {?}
      */
     applyColorStyleAllStars(setChecked) {
-        this.stars.forEach((star) => {
+        this.stars.forEach((/**
+         * @param {?} star
+         * @return {?}
+         */
+        (star) => {
             if (setChecked) {
                 this.applyCheckedColorStyle(star.nativeElement);
             }
             else {
                 this.applyUnCheckedColorStyle(star.nativeElement);
             }
-        });
+        }));
     }
     /**
      * @private
@@ -364,7 +396,11 @@ class StarRatingComponent {
                 .substring(3, 2)) ? true : false;
             /** @type {?} */
             let i = 1;
-            this.stars.forEach((star) => {
+            this.stars.forEach((/**
+             * @param {?} star
+             * @return {?}
+             */
+            (star) => {
                 star.nativeElement.classList = [];
                 this.applyColorStyle(star.nativeElement);
                 this.addDefaultClass(star.nativeElement);
@@ -380,7 +416,7 @@ class StarRatingComponent {
                     }
                 }
                 i++;
-            });
+            }));
         }
     }
 }
@@ -444,14 +480,15 @@ StarRatingComponent.decorators = [
    `
             }] }
 ];
+/** @nocollapse */
 StarRatingComponent.ctorParameters = () => [];
 StarRatingComponent.propDecorators = {
-    mainElement: [{ type: ViewChild, args: ['starMain',] }],
-    star1Element: [{ type: ViewChild, args: ['star1',] }],
-    star2Element: [{ type: ViewChild, args: ['star2',] }],
-    star3Element: [{ type: ViewChild, args: ['star3',] }],
-    star4Element: [{ type: ViewChild, args: ['star4',] }],
-    star5Element: [{ type: ViewChild, args: ['star5',] }],
+    mainElement: [{ type: ViewChild, args: ['starMain', { static: true },] }],
+    star1Element: [{ type: ViewChild, args: ['star1', { static: true },] }],
+    star2Element: [{ type: ViewChild, args: ['star2', { static: true },] }],
+    star3Element: [{ type: ViewChild, args: ['star3', { static: true },] }],
+    star4Element: [{ type: ViewChild, args: ['star4', { static: true },] }],
+    star5Element: [{ type: ViewChild, args: ['star5', { static: true },] }],
     rate: [{ type: Output }],
     checkedcolor: [{ type: Input, args: [StarRatingComponent.INP_CHECKED_COLOR,] }],
     uncheckedcolor: [{ type: Input, args: [StarRatingComponent.INP_UNCHECKED_COLOR,] }],
@@ -462,7 +499,7 @@ StarRatingComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class RatingModule {
     /**
@@ -485,16 +522,5 @@ RatingModule.decorators = [
             },] }
 ];
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
 export { RatingModule, StarRatingComponent, RatingComponent as ɵa };
-
 //# sourceMappingURL=ng-starrating.js.map

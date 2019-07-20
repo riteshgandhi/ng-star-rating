@@ -1,6 +1,6 @@
 # ng-starrating
 
-[![npm version](https://img.shields.io/badge/npm-v1.0.6-brightgreen.svg)](https://www.npmjs.com/package/ng-starrating/v/1.0.6)
+[![npm version](https://img.shields.io/badge/npm-v1.0.7-brightgreen.svg)](https://www.npmjs.com/package/ng-starrating/v/1.0.7)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/riteshgandhi/ng-star-rating)
 
 Simple, highly Customizable and Responsive Star Rating Library built using Angular.
@@ -138,6 +138,9 @@ Star Rating uses [npm](https://www.npmjs.com/get-npm) to manage package dependen
 All changes should be committed to the files in `src/`.
 
 ## Changelog
+
+`v1.0.7 - [2019-07-20]`
+- Upgraded to latest Angular version 8.1.1
 
 `v1.0.6 - [2019-01-03]`
 - Added custom event "rate"

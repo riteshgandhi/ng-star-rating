@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ratingElement } from '../app/ratingElement';
 import { StarRatingComponent } from 'ng-starrating';
+//import { StarRatingComponent } from './../../projects/rating/src/components/star-rating/star-rating.component';
 
 @Component({
   selector: 'app-root',

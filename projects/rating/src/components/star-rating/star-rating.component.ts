@@ -75,12 +75,12 @@ export class StarRatingComponent {
   private static readonly INP_SIZE: string = 'size';
   private static readonly INP_READONLY: string = 'readonly';
 
-  @ViewChild('starMain') private mainElement: ElementRef;
-  @ViewChild('star1') private star1Element: ElementRef;
-  @ViewChild('star2') private star2Element: ElementRef;
-  @ViewChild('star3') private star3Element: ElementRef;
-  @ViewChild('star4') private star4Element: ElementRef;
-  @ViewChild('star5') private star5Element: ElementRef;
+  @ViewChild('starMain', { static: true }) private mainElement: ElementRef;
+  @ViewChild('star1', { static: true }) private star1Element: ElementRef;
+  @ViewChild('star2', { static: true }) private star2Element: ElementRef;
+  @ViewChild('star3', { static: true }) private star3Element: ElementRef;
+  @ViewChild('star4', { static: true }) private star4Element: ElementRef;
+  @ViewChild('star5', { static: true }) private star5Element: ElementRef;
 
   constructor() {
     if (!this.onValueChange) {
@@ -140,7 +140,7 @@ export class StarRatingComponent {
     return String(this._readOnly) === "true";
   }
 
-  @Output() rate: EventEmitter<{oldValue:number, newValue:number, starRating:StarRatingComponent}> = new EventEmitter();
+  @Output() rate: EventEmitter<{ oldValue: number, newValue: number, starRating: StarRatingComponent }> = new EventEmitter();
 
   @Input(StarRatingComponent.INP_CHECKED_COLOR) set checkedcolor(value: string) {
     this._checkedColor = value;
@@ -228,7 +228,7 @@ export class StarRatingComponent {
     if (this.value == 0) {
       this.value = 1;
     }
-    let rateValues = {oldValue:oldValue, newValue:this.value, starRating:this};
+    let rateValues = { oldValue: oldValue, newValue: this.value, starRating: this };
     this.rate.emit(rateValues);
   }
 

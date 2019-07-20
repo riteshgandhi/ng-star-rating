@@ -1,11 +1,11 @@
+import { Component, ViewChild, Output, Input, EventEmitter, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { Component, Input, Output, ViewChild, EventEmitter, NgModule } from '@angular/core';
 import { Subject } from 'rxjs';
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 //import { StarRatingComponent } from '../components/star-rating/star-rating.component'
 var RatingComponent = /** @class */ (function () {
@@ -25,13 +25,14 @@ var RatingComponent = /** @class */ (function () {
                     template: "\n    <p>\n      rating works!\n    </p>\n  "
                 }] }
     ];
+    /** @nocollapse */
     RatingComponent.ctorParameters = function () { return []; };
     return RatingComponent;
 }());
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var StarRatingComponent = /** @class */ (function () {
     function StarRatingComponent() {
@@ -41,34 +42,49 @@ var StarRatingComponent = /** @class */ (function () {
         this.rate = new EventEmitter();
         if (!this.onValueChange) {
             this.onValueChange = new Subject();
-            this.onValueChange.subscribe(function () {
+            this.onValueChange.subscribe((/**
+             * @return {?}
+             */
+            function () {
                 _this.generateRating();
                 _this.applySizeAllStars();
-            });
+            }));
         }
         if (!this.onCheckedColorChange) {
             this.onCheckedColorChange = new Subject();
-            this.onCheckedColorChange.subscribe(function () {
+            this.onCheckedColorChange.subscribe((/**
+             * @return {?}
+             */
+            function () {
                 _this.applyColorStyleAllStars(true);
-            });
+            }));
         }
         if (!this.onUnCheckedColorChange) {
             this.onUnCheckedColorChange = new Subject();
-            this.onUnCheckedColorChange.subscribe(function () {
+            this.onUnCheckedColorChange.subscribe((/**
+             * @return {?}
+             */
+            function () {
                 _this.applyColorStyleAllStars(false);
-            });
+            }));
         }
         if (!this.onSizeChange) {
             this.onSizeChange = new Subject();
-            this.onSizeChange.subscribe(function () {
+            this.onSizeChange.subscribe((/**
+             * @return {?}
+             */
+            function () {
                 _this.applySizeAllStars();
-            });
+            }));
         }
         if (!this.onReadOnlyChange) {
             this.onReadOnlyChange = new Subject();
-            this.onReadOnlyChange.subscribe(function () {
+            this.onReadOnlyChange.subscribe((/**
+             * @return {?}
+             */
+            function () {
                 _this.addRemoveEvents();
-            });
+            }));
         }
     }
     Object.defineProperty(StarRatingComponent.prototype, "checkedcolor", {
@@ -189,12 +205,16 @@ var StarRatingComponent = /** @class */ (function () {
         this.mainElement.nativeElement.addEventListener('mouseleave', this.offStar.bind(this));
         this.mainElement.nativeElement.style.cursor = "pointer";
         this.mainElement.nativeElement.title = this.value;
-        this.stars.forEach(function (star) {
+        this.stars.forEach((/**
+         * @param {?} star
+         * @return {?}
+         */
+        function (star) {
             star.nativeElement.addEventListener('click', _this.onRate.bind(_this));
             star.nativeElement.addEventListener('mouseenter', _this.onStar.bind(_this));
             star.nativeElement.style.cursor = "pointer";
             star.nativeElement.title = star.nativeElement.dataset.index;
-        });
+        }));
     };
     /**
      * @private
@@ -208,12 +228,16 @@ var StarRatingComponent = /** @class */ (function () {
         this.mainElement.nativeElement.__zone_symbol__mouseleavefalse = null;
         this.mainElement.nativeElement.style.cursor = "default";
         this.mainElement.nativeElement.title = this.value;
-        this.stars.forEach(function (star) {
+        this.stars.forEach((/**
+         * @param {?} star
+         * @return {?}
+         */
+        function (star) {
             star.nativeElement.__zone_symbol__clickfalse = null;
             star.nativeElement.__zone_symbol__mouseenterfalse = null;
             star.nativeElement.style.cursor = "default";
             star.nativeElement.title = "";
-        });
+        }));
     };
     /**
      * @private
@@ -370,7 +394,11 @@ var StarRatingComponent = /** @class */ (function () {
     function () {
         var _this = this;
         if (this._size) {
-            this.stars.forEach(function (star) {
+            this.stars.forEach((/**
+             * @param {?} star
+             * @return {?}
+             */
+            function (star) {
                 /** @type {?} */
                 var newSize = _this.size.match(/\d+/)[0];
                 /** @type {?} */
@@ -382,7 +410,7 @@ var StarRatingComponent = /** @class */ (function () {
                     star.nativeElement.style.setProperty(StarRatingComponent.VAR_HALF_WIDTH, halfSize + "px");
                     star.nativeElement.style.setProperty(StarRatingComponent.VAR_HALF_MARGIN, halfMargin + "px");
                 }
-            });
+            }));
         }
     };
     /**
@@ -397,14 +425,18 @@ var StarRatingComponent = /** @class */ (function () {
      */
     function (setChecked) {
         var _this = this;
-        this.stars.forEach(function (star) {
+        this.stars.forEach((/**
+         * @param {?} star
+         * @return {?}
+         */
+        function (star) {
             if (setChecked) {
                 _this.applyCheckedColorStyle(star.nativeElement);
             }
             else {
                 _this.applyUnCheckedColorStyle(star.nativeElement);
             }
-        });
+        }));
     };
     /**
      * @private
@@ -468,7 +500,11 @@ var StarRatingComponent = /** @class */ (function () {
                 .substring(3, 2)) ? true : false;
             /** @type {?} */
             var i_1 = 1;
-            this.stars.forEach(function (star) {
+            this.stars.forEach((/**
+             * @param {?} star
+             * @return {?}
+             */
+            function (star) {
                 star.nativeElement.classList = [];
                 _this.applyColorStyle(star.nativeElement);
                 _this.addDefaultClass(star.nativeElement);
@@ -484,7 +520,7 @@ var StarRatingComponent = /** @class */ (function () {
                     }
                 }
                 i_1++;
-            });
+            }));
         }
     };
     StarRatingComponent.VAR_CHECKED_COLOR = '--checkedColor';
@@ -506,14 +542,15 @@ var StarRatingComponent = /** @class */ (function () {
                     template: "\n  <div #starMain>\n    <span data-index=\"1\" title=\"1\" #star1></span>\n    <span data-index=\"2\" title=\"2\" #star2></span>\n    <span data-index=\"3\" title=\"3\" #star3></span>\n    <span data-index=\"4\" title=\"4\" #star4></span>\n    <span data-index=\"5\" title=\"5\" #star5></span>\n  </div>\n  <style>\n    :root {\n      --checkedColor: gold;\n      --unCheckedColor: gray;\n      --size: 24px;\n      --halfWidth: 10px;\n      --halfMargin: -20px;\n    }  \n    .star {\n      cursor: pointer;\n      color: var(--unCheckedColor);\n      font-size: var(--size);\n      width: var(--size);\n      display: inline-block;\n    }\n    .star:last-child {\n      margin-right: 0;\n    }\n    .star:before {\n      content:'\\2605';\n    }\n    .star.on {\n      color: var(--checkedColor);\n    }\n    .star.half:after {\n      content:'\\2605';\n      color: var(--checkedColor);\n      position: absolute;\n      margin-left: var(--halfMargin);\n      width: var(--halfWidth);\n      overflow: hidden;\n    }\n  </style>\n   "
                 }] }
     ];
+    /** @nocollapse */
     StarRatingComponent.ctorParameters = function () { return []; };
     StarRatingComponent.propDecorators = {
-        mainElement: [{ type: ViewChild, args: ['starMain',] }],
-        star1Element: [{ type: ViewChild, args: ['star1',] }],
-        star2Element: [{ type: ViewChild, args: ['star2',] }],
-        star3Element: [{ type: ViewChild, args: ['star3',] }],
-        star4Element: [{ type: ViewChild, args: ['star4',] }],
-        star5Element: [{ type: ViewChild, args: ['star5',] }],
+        mainElement: [{ type: ViewChild, args: ['starMain', { static: true },] }],
+        star1Element: [{ type: ViewChild, args: ['star1', { static: true },] }],
+        star2Element: [{ type: ViewChild, args: ['star2', { static: true },] }],
+        star3Element: [{ type: ViewChild, args: ['star3', { static: true },] }],
+        star4Element: [{ type: ViewChild, args: ['star4', { static: true },] }],
+        star5Element: [{ type: ViewChild, args: ['star5', { static: true },] }],
         rate: [{ type: Output }],
         checkedcolor: [{ type: Input, args: [StarRatingComponent.INP_CHECKED_COLOR,] }],
         uncheckedcolor: [{ type: Input, args: [StarRatingComponent.INP_UNCHECKED_COLOR,] }],
@@ -526,7 +563,7 @@ var StarRatingComponent = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var RatingModule = /** @class */ (function () {
     function RatingModule() {
@@ -555,16 +592,5 @@ var RatingModule = /** @class */ (function () {
     return RatingModule;
 }());
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
 export { RatingModule, StarRatingComponent, RatingComponent as ɵa };
-
 //# sourceMappingURL=ng-starrating.js.map
