@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { ratingElement } from '../app/ratingElement';
 import { StarRatingComponent } from 'ng-starrating';
-//import { StarRatingComponent } from './../../projects/rating/src/components/star-rating/star-rating.component';
 
 @Component({
   selector: 'app-root',
@@ -22,6 +21,7 @@ export class AppComponent {
     ratingElement1.uncheckedcolor = "green";
     ratingElement1.value = 1;
     ratingElement1.size = 50;
+    ratingElement1.totalstars = 1;
 
     let ratingElement2 = new ratingElement();
     //ratingElement2.readonly = true;
@@ -29,6 +29,7 @@ export class AppComponent {
     ratingElement2.uncheckedcolor = "red";
     ratingElement2.value = 2;
     ratingElement2.size = 50;
+    ratingElement2.totalstars = 2;
 
     let ratingElement3 = new ratingElement();
     //ratingElement3.readonly = true;
@@ -36,6 +37,7 @@ export class AppComponent {
     ratingElement3.uncheckedcolor = "yellow";
     ratingElement3.value = 3;
     ratingElement3.size = 50;
+    ratingElement3.totalstars = 4;
 
     let ratingElement4 = new ratingElement();
     //ratingElement4.readonly = true;
@@ -43,6 +45,7 @@ export class AppComponent {
     ratingElement4.uncheckedcolor = "orange";
     ratingElement4.value = 4;
     ratingElement4.size = 50;
+    ratingElement4.totalstars = 6;
 
     let ratingElement5 = new ratingElement();
     //ratingElement5.readonly = true;
@@ -50,6 +53,7 @@ export class AppComponent {
     ratingElement5.uncheckedcolor = "black";
     ratingElement5.value = 5;
     ratingElement5.size = 50;
+    ratingElement5.totalstars = 8;
 
     this.starRatingElements.push(ratingElement1);
     this.starRatingElements.push(ratingElement2);

@@ -1,4 +1,5 @@
 export class ratingElement {
+    private _totalStars: number;
     private _checkedColor: string;
     private _unCheckedColor: string;
     private _size: number;
@@ -25,6 +26,10 @@ export class ratingElement {
         return this._readOnly;
     }
 
+    get totalstars(): number {
+        return this._totalStars;
+    }
+
     set checkedcolor(value: string) {
         this._checkedColor = value;
     }
@@ -44,6 +49,13 @@ export class ratingElement {
         this._size = value;
     }
 
+    set totalstars(value: number) {
+        if (!value || value == null) {
+            value = 5;
+        }
+        this._totalStars = value;
+    }
+
     set readonly(value: boolean) {
         this._readOnly = value;
     }
@@ -53,5 +65,6 @@ export class ratingElement {
         this.uncheckedcolor = "gray";
         this.value = 3.5;
         this.size = 24;
+        this.totalstars = 5;
     }
 }

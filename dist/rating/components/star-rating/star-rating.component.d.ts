@@ -6,6 +6,8 @@ export declare class StarRatingComponent {
     private _value;
     private _size;
     private _readOnly;
+    private _totalStars;
+    private onStarsCountChange;
     private onValueChange;
     private onCheckedColorChange;
     private onUnCheckedColorChange;
@@ -24,18 +26,15 @@ export declare class StarRatingComponent {
     private static readonly INP_VALUE;
     private static readonly INP_SIZE;
     private static readonly INP_READONLY;
+    private static readonly INP_TOTALSTARS;
     private mainElement;
-    private star1Element;
-    private star2Element;
-    private star3Element;
-    private star4Element;
-    private star5Element;
     constructor();
     checkedcolor: string;
     uncheckedcolor: string;
     value: number;
     size: string;
     readonly: boolean;
+    totalstars: number;
     rate: EventEmitter<{
         oldValue: number;
         newValue: number;

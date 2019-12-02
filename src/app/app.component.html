@@ -1,3 +1,9 @@
+<!-- <star-rating 
+    checkedcolor="red" 
+    uncheckedcolor="green" value="1.5" 
+    size="50" readonly="false" 
+    totalstars="3">
+</star-rating> -->
 <table>
     <thead>
         <tr>
@@ -6,10 +12,12 @@
             <th>Rating Value</th>
             <th>Size</th>
             <th>Read Only</th>
+            <th>Total Stars</th>
             <th>Star Rating</th>
         </tr>
     </thead>
     <colgroup>
+        <col span="1">
         <col span="1">
         <col span="1">
         <col span="1">
@@ -34,13 +42,14 @@
             <td data-th="Read Only">
                 <input type="checkbox" [(ngModel)]="element.readonly" value="{{element.readonly}}">
             </td>
+            <td data-th="Total Stars">
+                <input type="number" [(ngModel)]="element.totalstars" value="{{element.totalstars}}" min="1">
+            </td>
             <td data-th="Star Rating">
-                <star-rating [(value)]="element.value" 
-                    checkedcolor="{{element.checkedcolor}}" 
-                    uncheckedcolor="{{element.uncheckedcolor}}"
-                    size="{{element.size}}" readonly={{element.readonly}}
-                    (rate)="onRate($event)"
-                    #starrating></star-rating>
+                <star-rating [(value)]="element.value" [(totalstars)]="element.totalstars"
+                    checkedcolor="{{element.checkedcolor}}" uncheckedcolor="{{element.uncheckedcolor}}"
+                    size="{{element.size}}" readonly={{element.readonly}} (rate)="onRate($event)" #starrating>
+                </star-rating>
             </td>
         </tr>
     </tbody>

@@ -1,25 +1,31 @@
-.star {
+:root {
+    --checkedColor: gold;
+    --unCheckedColor: gray;
+    --size: 24px;
+    --halfWidth: 10px;
+    --halfMargin: -20px;
+  }  
+  .star {
     cursor: pointer;
-    font-size: x-large;
-    width: 20px;
+    color: var(--unCheckedColor);
+    font-size: var(--size);
+    width: var(--size);
     display: inline-block;
-    color: gray;
-}
-.star:last-child {
+  }
+  .star:last-child {
     margin-right: 0;
-}
-.star:before {
+  }
+  .star:before {
     content:'\2605';
-}
-.star.on {
-    color: gold;
-}
-/* .star.half:after {
-    --onCheckedColor: red;
+  }
+  .star.on {
+    color: var(--checkedColor);
+  }
+  .star.half:after {
     content:'\2605';
-    color: var(--onCheckedColor);
+    color: var(--checkedColor);
     position: absolute;
-    margin-left: -20px;
-    width: 10px;
+    margin-left: var(--halfMargin);
+    width: var(--halfWidth);
     overflow: hidden;
-} */
+  }

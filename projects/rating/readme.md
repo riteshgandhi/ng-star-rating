@@ -1,6 +1,6 @@
 # ng-starrating
 
-[![npm version](https://img.shields.io/badge/npm-v1.0.7-brightgreen.svg)](https://www.npmjs.com/package/ng-starrating/v/1.0.7)
+[![npm version](https://img.shields.io/badge/npm-v1.0.7-brightgreen.svg)](https://www.npmjs.com/package/ng-starrating/v/1.0.9)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/riteshgandhi/ng-star-rating)
 
 Simple, highly Customizable and Responsive Star Rating Library built using Angular.
@@ -14,7 +14,7 @@ For production, use the files from the `dist/` folder.
  - Simple and customizable
  - Light weight. Built using CSS only
  - Responsive
-
+ - Parameterized total number of stars 
 
 ## Installation
 
@@ -46,7 +46,7 @@ export class AppModule { }
   <h1>
     ng-starrating demo
   </h1>
-  <star-rating value="5" checkedcolor="red" uncheckedcolor="black" size="24px"    readonly="false" (rate)="onRate($event)"></star-rating>
+  <star-rating value="5" totalstars="5" checkedcolor="red" uncheckedcolor="black" size="24px" readonly="false" (rate)="onRate($event)"></star-rating>
 </div>
 ```
 
@@ -85,7 +85,14 @@ uncheckedcolor: "gray",
 size: "24px",
 value: 0,
 readonly: false,
+totalstars: 5
 ```
+
+### totalstars:
+
+Type: `Number`
+
+Adds the number of stars. Default value is 5
 
 ### checkedcolor:
 
@@ -138,6 +145,12 @@ Star Rating uses [npm](https://www.npmjs.com/get-npm) to manage package dependen
 All changes should be committed to the files in `src/`.
 
 ## Changelog
+
+`v1.0.9 - [2019-12-02]`
+- Added new property "totalstars" to allow parameterization of number of stars
+
+`v1.0.8 - Beta [2019-12-02]`
+- Added new property "totalstars" to allow parameterization of number of stars
 
 `v1.0.7 - [2019-07-20]`
 - Upgraded to latest Angular version 8.1.1

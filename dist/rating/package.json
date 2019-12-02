@@ -1,6 +1,6 @@
 {
   "name": "ng-starrating",
-  "version": "1.0.7",
+  "version": "1.0.9",
   "description": "Star Rating Library using Angular",
   "peerDependencies": {
     "@angular/common": "^8.1.1",
@@ -28,7 +28,8 @@
     "responsive-rating",
     "responsive-star-rating",
     "simple-rating",
-    "just-rating"
+    "just-rating",
+    "multi-star-rating"
   ],
   "author": "Ritesh Gandhi",
   "contributors": [
