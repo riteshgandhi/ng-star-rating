@@ -7,7 +7,7 @@ Simple, highly Customizable and Responsive Star Rating Library built using Angul
 
 For production, use the files from the `dist/` folder.
 
-[Demo](https://angular-smk2vr.stackblitz.io/)
+[Demo](https://ng-starratingdemo.stackblitz.io/)
 
 ## Why it's better
 
