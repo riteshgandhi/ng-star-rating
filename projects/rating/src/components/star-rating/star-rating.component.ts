@@ -46,7 +46,7 @@ export class StarRatingComponent {
       this.onStarsCountChange = new Subject();
       this.onStarsCountChange.subscribe(() => {
         this.setStars();
-        this.generateRating();
+        this.generateRating(true);
         this.applySizeAllStars();
         this.applyColorStyleAllStars(false);
         this.addRemoveEvents();
@@ -189,10 +189,9 @@ export class StarRatingComponent {
     let star: HTMLElement = <HTMLElement>event.srcElement;
     let oldValue = this.value;
     this.value = parseInt(star.dataset.index);
-    this.value = this.value == 0 && 1;
-    // if (this.value == 0) {
-    //   this.value = 1;
-    // }
+    if (this.value == 0) {
+      this.value = 1;
+    }
     let rateValues = { oldValue: oldValue, newValue: this.value, starRating: this };
     this.rate.emit(rateValues);
   }
@@ -234,9 +233,6 @@ export class StarRatingComponent {
     let maxStars = [...Array(Number(this.totalstars)).keys()];
     this.stars.length = 0;
     starContainer.innerHTML = "";
-    // Array.from(starContainer.querySelectorAll('span')).forEach(element => {
-    //   starContainer.removeChild(element);
-    // });
     maxStars.forEach(starNumber => {
       let starElement: HTMLSpanElement = document.createElement("span");
       starElement.dataset.index = (starNumber + 1).toString();
@@ -286,8 +282,8 @@ export class StarRatingComponent {
     starElement.style.setProperty(StarRatingComponent.VAR_UNCHECKED_COLOR, this.uncheckedcolor);
   }
 
-  private generateRating() {
-    if (this.readonly) {
+  private generateRating(forceGenerate:boolean = false) {
+    if (this.readonly && !forceGenerate) {
       return;
     }
     this.stars.length == 0 && this.setStars();

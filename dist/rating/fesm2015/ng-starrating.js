@@ -46,7 +46,7 @@ class StarRatingComponent {
              */
             () => {
                 this.setStars();
-                this.generateRating();
+                this.generateRating(true);
                 this.applySizeAllStars();
                 this.applyColorStyleAllStars(false);
                 this.addRemoveEvents();
@@ -254,10 +254,9 @@ class StarRatingComponent {
         /** @type {?} */
         let oldValue = this.value;
         this.value = parseInt(star.dataset.index);
-        this.value = this.value == 0 && 1;
-        // if (this.value == 0) {
-        //   this.value = 1;
-        // }
+        if (this.value == 0) {
+            this.value = 1;
+        }
         /** @type {?} */
         let rateValues = { oldValue: oldValue, newValue: this.value, starRating: this };
         this.rate.emit(rateValues);
@@ -325,9 +324,6 @@ class StarRatingComponent {
         let maxStars = [...Array(Number(this.totalstars)).keys()];
         this.stars.length = 0;
         starContainer.innerHTML = "";
-        // Array.from(starContainer.querySelectorAll('span')).forEach(element => {
-        //   starContainer.removeChild(element);
-        // });
         maxStars.forEach((/**
          * @param {?} starNumber
          * @return {?}
@@ -414,10 +410,11 @@ class StarRatingComponent {
     }
     /**
      * @private
+     * @param {?=} forceGenerate
      * @return {?}
      */
-    generateRating() {
-        if (this.readonly) {
+    generateRating(forceGenerate = false) {
+        if (this.readonly && !forceGenerate) {
             return;
         }
         this.stars.length == 0 && this.setStars();

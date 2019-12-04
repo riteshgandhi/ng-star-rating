@@ -1,6 +1,6 @@
 # ng-starrating
 
-[![npm version](https://img.shields.io/badge/npm-v1.0.7-brightgreen.svg)](https://www.npmjs.com/package/ng-starrating/v/1.0.9)
+[![npm version](https://img.shields.io/badge/npm-v1.0.10-brightgreen.svg)](https://www.npmjs.com/package/ng-starrating/v/1.0.10)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/riteshgandhi/ng-star-rating)
 
 Simple, highly Customizable and Responsive Star Rating Library built using Angular.
@@ -145,6 +145,9 @@ Star Rating uses [npm](https://www.npmjs.com/get-npm) to manage package dependen
 All changes should be committed to the files in `src/`.
 
 ## Changelog
+
+`v1.0.10 - [2019-12-03]`
+- Fixed issue with readonly property
 
 `v1.0.9 - [2019-12-02]`
 - Added new property "totalstars" to allow parameterization of number of stars

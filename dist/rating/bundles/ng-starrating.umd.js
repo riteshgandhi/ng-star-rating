@@ -87,7 +87,7 @@
                  */
                 function () {
                     _this.setStars();
-                    _this.generateRating();
+                    _this.generateRating(true);
                     _this.applySizeAllStars();
                     _this.applyColorStyleAllStars(false);
                     _this.addRemoveEvents();
@@ -341,10 +341,9 @@
             /** @type {?} */
             var oldValue = this.value;
             this.value = parseInt(star.dataset.index);
-            this.value = this.value == 0 && 1;
-            // if (this.value == 0) {
-            //   this.value = 1;
-            // }
+            if (this.value == 0) {
+                this.value = 1;
+            }
             /** @type {?} */
             var rateValues = { oldValue: oldValue, newValue: this.value, starRating: this };
             this.rate.emit(rateValues);
@@ -442,9 +441,6 @@
             var maxStars = __spread(Array(Number(this.totalstars)).keys());
             this.stars.length = 0;
             starContainer.innerHTML = "";
-            // Array.from(starContainer.querySelectorAll('span')).forEach(element => {
-            //   starContainer.removeChild(element);
-            // });
             maxStars.forEach((/**
              * @param {?} starNumber
              * @return {?}
@@ -557,15 +553,18 @@
         };
         /**
          * @private
+         * @param {?=} forceGenerate
          * @return {?}
          */
         StarRatingComponent.prototype.generateRating = /**
          * @private
+         * @param {?=} forceGenerate
          * @return {?}
          */
-        function () {
+        function (forceGenerate) {
             var _this = this;
-            if (this.readonly) {
+            if (forceGenerate === void 0) { forceGenerate = false; }
+            if (this.readonly && !forceGenerate) {
                 return;
             }
             this.stars.length == 0 && this.setStars();
