@@ -1,13 +1,18 @@
 # ng-starrating
 
-[![npm version](https://img.shields.io/badge/npm-v1.0.10-brightgreen.svg)](https://www.npmjs.com/package/ng-starrating/v/1.0.10)
+[![npm version](https://img.shields.io/badge/npm-v1.0.14-brightgreen.svg)](https://www.npmjs.com/package/ng-starrating/v/1.0.14)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/riteshgandhi/ng-star-rating)
 
 Simple, highly Customizable and Responsive Star Rating Library built using Angular.
 
 For production, use the files from the `dist/` folder.
 
-[Demo](https://angular-smk2vr.stackblitz.io/)
+[Demo](https://ng-starratingdemo.stackblitz.io/)
+
+Edge browser support: Import webcomponents bundle for Edge browser
+```
+<script src="https://cdn.jsdelivr.net/npm/@webcomponents/webcomponentsjs@2.4.1/webcomponents-bundle.min.js"></script>
+```
 
 ## Why it's better
 
@@ -145,6 +150,17 @@ Star Rating uses [npm](https://www.npmjs.com/get-npm) to manage package dependen
 All changes should be committed to the files in `src/`.
 
 ## Changelog
+
+`v1.0.14 - [2020-02-11]`
+`v1.0.13 - [2020-02-11]`
+- minor fixes 
+
+`v1.0.12 - [2020-02-10]`
+- Fixed issue with rating not initializing with more than 5 stars when total stars equals 10 
+- Upgraded to latest Angular version 9.0.0
+
+`v1.0.11 - [2019-12-10]`
+- Minor bug fix
 
 `v1.0.10 - [2019-12-03]`
 - Fixed issue with readonly property

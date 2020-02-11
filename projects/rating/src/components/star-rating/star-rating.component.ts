@@ -1,22 +1,24 @@
-import { Component, Input, Output, ViewChild, ElementRef, EventEmitter, ViewEncapsulation } from '@angular/core';
+import { Component, Input, Output, ViewChild, ElementRef, 
+  EventEmitter, ViewEncapsulation } from '@angular/core';
 import { Subject } from 'rxjs';
 
 @Component({
   selector: 'star-rating',
   templateUrl: './star-rating.component.html',
   styleUrls: ['./star-rating.component.css'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.ShadowDom
 })
 
 export class StarRatingComponent {
   private stars: Array<Element> = [];
+  
   private _checkedColor: string;
   private _unCheckedColor: string;
   private _value: number;
   private _size: string;
   private _readOnly: boolean = false;
-  private _totalStars: number = 5;
 
+  private _totalStars: number = 5;
   private onStarsCountChange: Subject<number>;
   private onValueChange: Subject<number>;
   private onCheckedColorChange: Subject<string>;
@@ -49,7 +51,8 @@ export class StarRatingComponent {
         this.generateRating(true);
         this.applySizeAllStars();
         this.applyColorStyleAllStars(false);
-        this.addRemoveEvents();
+        this.addEvents();
+        //this.addRemoveEvents();
       });
     }
 
@@ -85,7 +88,8 @@ export class StarRatingComponent {
     if (!this.onReadOnlyChange) {
       this.onReadOnlyChange = new Subject();
       this.onReadOnlyChange.subscribe(() => {
-        this.addRemoveEvents();
+        this.readonly ? this.makeReadOnly() : this.makeEditable();
+        //this.addRemoveEvents();
       });
     }
   }
@@ -128,7 +132,6 @@ export class StarRatingComponent {
 
   @Input(StarRatingComponent.INP_VALUE) set value(value: number) {
     value = (!value || value == null) ? 0 : value;
-    value > this.stars.length && (value = this.stars.length);
     this._value = value;
     this._value >= 0 && this.onValueChange.next(this._value);
   }
@@ -149,7 +152,50 @@ export class StarRatingComponent {
     this.onStarsCountChange.next(Number(value));
   }
 
+  // private makeEditable() {
+  //   if (!this.mainElement) return;
+  //   this.mainElement.nativeElement.addEventListener('mouseleave', this.offStar.bind(this));
+  //   this.mainElement.nativeElement.style.cursor = "pointer";
+  //   this.mainElement.nativeElement.title = this.value;
+  //   this.stars.forEach((star: any) => {
+  //     star.addEventListener('click', this.onRate.bind(this));
+  //     star.addEventListener('mouseenter', this.onStar.bind(this));
+  //     star.style.cursor = "pointer";
+  //     star.title = star.dataset.index;
+  //   });
+  // }
+
   private makeEditable() {
+    if (!this.mainElement) return;
+    this.mainElement.nativeElement.style.cursor = "pointer";
+    this.mainElement.nativeElement.title = this.value;
+    this.stars.forEach((star: any) => {
+      star.style.cursor = "pointer";
+      star.title = star.dataset.index;
+    });
+  }
+
+  private makeReadOnly() {
+    if (!this.mainElement) return;
+    this.mainElement.nativeElement.style.cursor = "default";
+    this.mainElement.nativeElement.title = this.value;
+    this.stars.forEach((star: any) => {
+      star.style.cursor = "default";
+      star.title = "";
+    });
+  }
+
+  // private addRemoveEvents() {
+  //   if (this.readonly) {
+  //     this.makeReadOnly();
+  //   } else {
+  //     this.makeEditable();
+  //     this.onValueChange.next(this.value);
+  //   }
+  // }
+
+  private addEvents() {
+    if (!this.mainElement) return;
     this.mainElement.nativeElement.addEventListener('mouseleave', this.offStar.bind(this));
     this.mainElement.nativeElement.style.cursor = "pointer";
     this.mainElement.nativeElement.title = this.value;
@@ -161,31 +207,12 @@ export class StarRatingComponent {
     });
   }
 
-  private makeReadOnly() {
-    this.mainElement.nativeElement.__zone_symbol__mouseleavefalse = null;
-    this.mainElement.nativeElement.style.cursor = "default";
-    this.mainElement.nativeElement.title = this.value;
-    this.stars.forEach((star: any) => {
-      star.__zone_symbol__clickfalse = null;
-      star.__zone_symbol__mouseenterfalse = null;
-      star.style.cursor = "default";
-      star.title = "";
-    });
-  }
-
-  private addRemoveEvents() {
-    if (this.readonly) {
-      this.makeReadOnly();
-    } else {
-      this.makeEditable();
-      this.onValueChange.next(this.value);
-    }
-  }
 
   private ngAfterViewInit() {
   }
 
   private onRate(event: MouseEvent) {
+    if (this.readonly) return;
     let star: HTMLElement = <HTMLElement>event.srcElement;
     let oldValue = this.value;
     this.value = parseInt(star.dataset.index);
@@ -197,6 +224,7 @@ export class StarRatingComponent {
   }
 
   private onStar(event: MouseEvent) {
+    if (this.readonly) return;
     let star: HTMLElement = <HTMLElement>event.srcElement;
     let currentIndex = parseInt(star.dataset.index);
 
@@ -229,6 +257,7 @@ export class StarRatingComponent {
   }
 
   private setStars() {
+    if (!this.mainElement) return;
     let starContainer: HTMLDivElement = this.mainElement.nativeElement;
     let maxStars = [...Array(Number(this.totalstars)).keys()];
     this.stars.length = 0;
@@ -246,6 +275,9 @@ export class StarRatingComponent {
     if (this._size) {
       this.stars.length == 0 && this.setStars();
       this.stars.forEach((star: any) => {
+        // const newSize = this._size.match(/\d+/)[0];
+        // let halfSize = parseInt(newSize, 10) / 2;
+        // let halfMargin = 0 - parseInt(newSize, 10);        
         let newSize = this.size.match(/\d+/)[0];
         let halfSize = (parseInt(newSize) * 10) / 24;
         let halfMargin = 0 - ((parseInt(newSize) * 20) / 24);
@@ -283,9 +315,8 @@ export class StarRatingComponent {
   }
 
   private generateRating(forceGenerate:boolean = false) {
-    if (this.readonly && !forceGenerate) {
-      return;
-    }
+    if (this.readonly && !forceGenerate) return;
+    if (!this.mainElement) return;
     this.stars.length == 0 && this.setStars();
     if (this.value >= 0) {
       this.mainElement.nativeElement.title = this.value;

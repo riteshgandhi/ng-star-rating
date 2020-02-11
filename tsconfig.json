@@ -27,5 +27,9 @@
         "dist/rating/*"
       ]
     }
+  },
+  "angularCompilerOptions" : {
+    "enableIvy" : true,
+    "allowEmptyCodegenFiles": true
   }
 }

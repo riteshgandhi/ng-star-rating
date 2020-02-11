@@ -2,7 +2,7 @@
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@angular/forms'), require('@angular/common'), require('rxjs')) :
     typeof define === 'function' && define.amd ? define('ng-starrating', ['exports', '@angular/core', '@angular/forms', '@angular/common', 'rxjs'], factory) :
     (global = global || self, factory(global['ng-starrating'] = {}, global.ng.core, global.ng.forms, global.ng.common, global.rxjs));
-}(this, function (exports, core, forms, common, rxjs) { 'use strict';
+}(this, (function (exports, core, forms, common, rxjs) { 'use strict';
 
     /*! *****************************************************************************
     Copyright (c) Microsoft Corporation. All rights reserved.
@@ -18,6 +18,110 @@
     See the Apache Version 2.0 License for specific language governing permissions
     and limitations under the License.
     ***************************************************************************** */
+    /* global Reflect, Promise */
+
+    var extendStatics = function(d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+
+    function __extends(d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    }
+
+    var __assign = function() {
+        __assign = Object.assign || function __assign(t) {
+            for (var s, i = 1, n = arguments.length; i < n; i++) {
+                s = arguments[i];
+                for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+            }
+            return t;
+        };
+        return __assign.apply(this, arguments);
+    };
+
+    function __rest(s, e) {
+        var t = {};
+        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
+            t[p] = s[p];
+        if (s != null && typeof Object.getOwnPropertySymbols === "function")
+            for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+                if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
+                    t[p[i]] = s[p[i]];
+            }
+        return t;
+    }
+
+    function __decorate(decorators, target, key, desc) {
+        var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+        if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+        else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+        return c > 3 && r && Object.defineProperty(target, key, r), r;
+    }
+
+    function __param(paramIndex, decorator) {
+        return function (target, key) { decorator(target, key, paramIndex); }
+    }
+
+    function __metadata(metadataKey, metadataValue) {
+        if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(metadataKey, metadataValue);
+    }
+
+    function __awaiter(thisArg, _arguments, P, generator) {
+        return new (P || (P = Promise))(function (resolve, reject) {
+            function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+            function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+            function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+            step((generator = generator.apply(thisArg, _arguments || [])).next());
+        });
+    }
+
+    function __generator(thisArg, body) {
+        var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+        return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+        function verb(n) { return function (v) { return step([n, v]); }; }
+        function step(op) {
+            if (f) throw new TypeError("Generator is already executing.");
+            while (_) try {
+                if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+                if (y = 0, t) op = [op[0] & 2, t.value];
+                switch (op[0]) {
+                    case 0: case 1: t = op; break;
+                    case 4: _.label++; return { value: op[1], done: false };
+                    case 5: _.label++; y = op[1]; op = [0]; continue;
+                    case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                    default:
+                        if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                        if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                        if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                        if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                        if (t[2]) _.ops.pop();
+                        _.trys.pop(); continue;
+                }
+                op = body.call(thisArg, _);
+            } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+            if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+        }
+    }
+
+    function __exportStar(m, exports) {
+        for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+    }
+
+    function __values(o) {
+        var m = typeof Symbol === "function" && o[Symbol.iterator], i = 0;
+        if (m) return m.call(o);
+        return {
+            next: function () {
+                if (o && i >= o.length) o = void 0;
+                return { value: o && o[i++], done: !o };
+            }
+        };
+    }
 
     function __read(o, n) {
         var m = typeof Symbol === "function" && o[Symbol.iterator];
@@ -42,37 +146,76 @@
         return ar;
     }
 
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    //import { StarRatingComponent } from '../components/star-rating/star-rating.component'
+    function __spreadArrays() {
+        for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
+        for (var r = Array(s), k = 0, i = 0; i < il; i++)
+            for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
+                r[k] = a[j];
+        return r;
+    };
+
+    function __await(v) {
+        return this instanceof __await ? (this.v = v, this) : new __await(v);
+    }
+
+    function __asyncGenerator(thisArg, _arguments, generator) {
+        if (!Symbol.asyncIterator) throw new TypeError("Symbol.asyncIterator is not defined.");
+        var g = generator.apply(thisArg, _arguments || []), i, q = [];
+        return i = {}, verb("next"), verb("throw"), verb("return"), i[Symbol.asyncIterator] = function () { return this; }, i;
+        function verb(n) { if (g[n]) i[n] = function (v) { return new Promise(function (a, b) { q.push([n, v, a, b]) > 1 || resume(n, v); }); }; }
+        function resume(n, v) { try { step(g[n](v)); } catch (e) { settle(q[0][3], e); } }
+        function step(r) { r.value instanceof __await ? Promise.resolve(r.value.v).then(fulfill, reject) : settle(q[0][2], r); }
+        function fulfill(value) { resume("next", value); }
+        function reject(value) { resume("throw", value); }
+        function settle(f, v) { if (f(v), q.shift(), q.length) resume(q[0][0], q[0][1]); }
+    }
+
+    function __asyncDelegator(o) {
+        var i, p;
+        return i = {}, verb("next"), verb("throw", function (e) { throw e; }), verb("return"), i[Symbol.iterator] = function () { return this; }, i;
+        function verb(n, f) { i[n] = o[n] ? function (v) { return (p = !p) ? { value: __await(o[n](v)), done: n === "return" } : f ? f(v) : v; } : f; }
+    }
+
+    function __asyncValues(o) {
+        if (!Symbol.asyncIterator) throw new TypeError("Symbol.asyncIterator is not defined.");
+        var m = o[Symbol.asyncIterator], i;
+        return m ? m.call(o) : (o = typeof __values === "function" ? __values(o) : o[Symbol.iterator](), i = {}, verb("next"), verb("throw"), verb("return"), i[Symbol.asyncIterator] = function () { return this; }, i);
+        function verb(n) { i[n] = o[n] && function (v) { return new Promise(function (resolve, reject) { v = o[n](v), settle(resolve, reject, v.done, v.value); }); }; }
+        function settle(resolve, reject, d, v) { Promise.resolve(v).then(function(v) { resolve({ value: v, done: d }); }, reject); }
+    }
+
+    function __makeTemplateObject(cooked, raw) {
+        if (Object.defineProperty) { Object.defineProperty(cooked, "raw", { value: raw }); } else { cooked.raw = raw; }
+        return cooked;
+    };
+
+    function __importStar(mod) {
+        if (mod && mod.__esModule) return mod;
+        var result = {};
+        if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+        result.default = mod;
+        return result;
+    }
+
+    function __importDefault(mod) {
+        return (mod && mod.__esModule) ? mod : { default: mod };
+    }
+
     var RatingComponent = /** @class */ (function () {
         function RatingComponent() {
         }
-        /**
-         * @return {?}
-         */
-        RatingComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
-        function () {
+        RatingComponent.prototype.ngOnInit = function () {
         };
-        RatingComponent.decorators = [
-            { type: core.Component, args: [{
-                        selector: 'lib-rating',
-                        template: "\n    <p>\n      rating works!\n    </p>\n  "
-                    }] }
-        ];
-        /** @nocollapse */
-        RatingComponent.ctorParameters = function () { return []; };
+        RatingComponent = __decorate([
+            core.Component({
+                selector: 'lib-rating',
+                template: "\n    <p>\n      rating works!\n    </p>\n  "
+            }),
+            __metadata("design:paramtypes", [])
+        ], RatingComponent);
         return RatingComponent;
     }());
 
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
     var StarRatingComponent = /** @class */ (function () {
         function StarRatingComponent() {
             var _this = this;
@@ -82,76 +225,54 @@
             this.rate = new core.EventEmitter();
             if (!this.onStarsCountChange) {
                 this.onStarsCountChange = new rxjs.Subject();
-                this.onStarsCountChange.subscribe((/**
-                 * @return {?}
-                 */
-                function () {
+                this.onStarsCountChange.subscribe(function () {
                     _this.setStars();
                     _this.generateRating(true);
                     _this.applySizeAllStars();
                     _this.applyColorStyleAllStars(false);
-                    _this.addRemoveEvents();
-                }));
+                    _this.addEvents();
+                    //this.addRemoveEvents();
+                });
             }
             if (!this.onValueChange) {
                 this.onValueChange = new rxjs.Subject();
-                this.onValueChange.subscribe((/**
-                 * @return {?}
-                 */
-                function () {
+                this.onValueChange.subscribe(function () {
                     _this.generateRating();
                     _this.applySizeAllStars();
-                }));
+                });
             }
             if (!this.onCheckedColorChange) {
                 this.onCheckedColorChange = new rxjs.Subject();
-                this.onCheckedColorChange.subscribe((/**
-                 * @return {?}
-                 */
-                function () {
+                this.onCheckedColorChange.subscribe(function () {
                     _this.applyColorStyleAllStars(true);
-                }));
+                });
             }
             if (!this.onUnCheckedColorChange) {
                 this.onUnCheckedColorChange = new rxjs.Subject();
-                this.onUnCheckedColorChange.subscribe((/**
-                 * @return {?}
-                 */
-                function () {
+                this.onUnCheckedColorChange.subscribe(function () {
                     _this.applyColorStyleAllStars(false);
-                }));
+                });
             }
             if (!this.onSizeChange) {
                 this.onSizeChange = new rxjs.Subject();
-                this.onSizeChange.subscribe((/**
-                 * @return {?}
-                 */
-                function () {
+                this.onSizeChange.subscribe(function () {
                     _this.applySizeAllStars();
-                }));
+                });
             }
             if (!this.onReadOnlyChange) {
                 this.onReadOnlyChange = new rxjs.Subject();
-                this.onReadOnlyChange.subscribe((/**
-                 * @return {?}
-                 */
-                function () {
-                    _this.addRemoveEvents();
-                }));
+                this.onReadOnlyChange.subscribe(function () {
+                    _this.readonly ? _this.makeReadOnly() : _this.makeEditable();
+                    //this.addRemoveEvents();
+                });
             }
         }
+        StarRatingComponent_1 = StarRatingComponent;
         Object.defineProperty(StarRatingComponent.prototype, "checkedcolor", {
-            get: /**
-             * @return {?}
-             */
-            function () {
+            get: function () {
                 return this._checkedColor;
             },
-            set: /**
-             * @param {?} value
-             * @return {?}
-             */
-            function (value) {
+            set: function (value) {
                 this._checkedColor = value;
                 this._checkedColor && this.onCheckedColorChange.next(this._checkedColor);
             },
@@ -159,17 +280,10 @@
             configurable: true
         });
         Object.defineProperty(StarRatingComponent.prototype, "uncheckedcolor", {
-            get: /**
-             * @return {?}
-             */
-            function () {
+            get: function () {
                 return this._unCheckedColor;
             },
-            set: /**
-             * @param {?} value
-             * @return {?}
-             */
-            function (value) {
+            set: function (value) {
                 this._unCheckedColor = value;
                 this._unCheckedColor && this.onUnCheckedColorChange.next(this._unCheckedColor);
             },
@@ -177,19 +291,11 @@
             configurable: true
         });
         Object.defineProperty(StarRatingComponent.prototype, "value", {
-            get: /**
-             * @return {?}
-             */
-            function () {
+            get: function () {
                 return this._value;
             },
-            set: /**
-             * @param {?} value
-             * @return {?}
-             */
-            function (value) {
+            set: function (value) {
                 value = (!value || value == null) ? 0 : value;
-                value > this.stars.length && (value = this.stars.length);
                 this._value = value;
                 this._value >= 0 && this.onValueChange.next(this._value);
             },
@@ -197,17 +303,10 @@
             configurable: true
         });
         Object.defineProperty(StarRatingComponent.prototype, "size", {
-            get: /**
-             * @return {?}
-             */
-            function () {
+            get: function () {
                 return this._size.concat((!this._size.includes("px") ? "px" : ""));
             },
-            set: /**
-             * @param {?} value
-             * @return {?}
-             */
-            function (value) {
+            set: function (value) {
                 value = (!value || value == null || value == "0px") ? "24px" : value;
                 this._size = value;
                 this.onSizeChange.next(this._size);
@@ -216,17 +315,10 @@
             configurable: true
         });
         Object.defineProperty(StarRatingComponent.prototype, "readonly", {
-            get: /**
-             * @return {?}
-             */
-            function () {
+            get: function () {
                 return String(this._readOnly) === "true";
             },
-            set: /**
-             * @param {?} value
-             * @return {?}
-             */
-            function (value) {
+            set: function (value) {
                 this._readOnly = value;
                 this.onReadOnlyChange.next(value);
             },
@@ -234,134 +326,88 @@
             configurable: true
         });
         Object.defineProperty(StarRatingComponent.prototype, "totalstars", {
-            get: /**
-             * @return {?}
-             */
-            function () {
+            get: function () {
                 return this._totalStars;
             },
-            set: /**
-             * @param {?} value
-             * @return {?}
-             */
-            function (value) {
+            set: function (value) {
                 this._totalStars = value <= 0 ? 5 : value;
                 this.onStarsCountChange.next(Number(value));
             },
             enumerable: true,
             configurable: true
         });
-        /**
-         * @private
-         * @return {?}
-         */
-        StarRatingComponent.prototype.makeEditable = /**
-         * @private
-         * @return {?}
-         */
-        function () {
+        // private makeEditable() {
+        //   if (!this.mainElement) return;
+        //   this.mainElement.nativeElement.addEventListener('mouseleave', this.offStar.bind(this));
+        //   this.mainElement.nativeElement.style.cursor = "pointer";
+        //   this.mainElement.nativeElement.title = this.value;
+        //   this.stars.forEach((star: any) => {
+        //     star.addEventListener('click', this.onRate.bind(this));
+        //     star.addEventListener('mouseenter', this.onStar.bind(this));
+        //     star.style.cursor = "pointer";
+        //     star.title = star.dataset.index;
+        //   });
+        // }
+        StarRatingComponent.prototype.makeEditable = function () {
+            if (!this.mainElement)
+                return;
+            this.mainElement.nativeElement.style.cursor = "pointer";
+            this.mainElement.nativeElement.title = this.value;
+            this.stars.forEach(function (star) {
+                star.style.cursor = "pointer";
+                star.title = star.dataset.index;
+            });
+        };
+        StarRatingComponent.prototype.makeReadOnly = function () {
+            if (!this.mainElement)
+                return;
+            this.mainElement.nativeElement.style.cursor = "default";
+            this.mainElement.nativeElement.title = this.value;
+            this.stars.forEach(function (star) {
+                star.style.cursor = "default";
+                star.title = "";
+            });
+        };
+        // private addRemoveEvents() {
+        //   if (this.readonly) {
+        //     this.makeReadOnly();
+        //   } else {
+        //     this.makeEditable();
+        //     this.onValueChange.next(this.value);
+        //   }
+        // }
+        StarRatingComponent.prototype.addEvents = function () {
             var _this = this;
+            if (!this.mainElement)
+                return;
             this.mainElement.nativeElement.addEventListener('mouseleave', this.offStar.bind(this));
             this.mainElement.nativeElement.style.cursor = "pointer";
             this.mainElement.nativeElement.title = this.value;
-            this.stars.forEach((/**
-             * @param {?} star
-             * @return {?}
-             */
-            function (star) {
+            this.stars.forEach(function (star) {
                 star.addEventListener('click', _this.onRate.bind(_this));
                 star.addEventListener('mouseenter', _this.onStar.bind(_this));
                 star.style.cursor = "pointer";
                 star.title = star.dataset.index;
-            }));
+            });
         };
-        /**
-         * @private
-         * @return {?}
-         */
-        StarRatingComponent.prototype.makeReadOnly = /**
-         * @private
-         * @return {?}
-         */
-        function () {
-            this.mainElement.nativeElement.__zone_symbol__mouseleavefalse = null;
-            this.mainElement.nativeElement.style.cursor = "default";
-            this.mainElement.nativeElement.title = this.value;
-            this.stars.forEach((/**
-             * @param {?} star
-             * @return {?}
-             */
-            function (star) {
-                star.__zone_symbol__clickfalse = null;
-                star.__zone_symbol__mouseenterfalse = null;
-                star.style.cursor = "default";
-                star.title = "";
-            }));
+        StarRatingComponent.prototype.ngAfterViewInit = function () {
         };
-        /**
-         * @private
-         * @return {?}
-         */
-        StarRatingComponent.prototype.addRemoveEvents = /**
-         * @private
-         * @return {?}
-         */
-        function () {
-            if (this.readonly) {
-                this.makeReadOnly();
-            }
-            else {
-                this.makeEditable();
-                this.onValueChange.next(this.value);
-            }
-        };
-        /**
-         * @private
-         * @return {?}
-         */
-        StarRatingComponent.prototype.ngAfterViewInit = /**
-         * @private
-         * @return {?}
-         */
-        function () {
-        };
-        /**
-         * @private
-         * @param {?} event
-         * @return {?}
-         */
-        StarRatingComponent.prototype.onRate = /**
-         * @private
-         * @param {?} event
-         * @return {?}
-         */
-        function (event) {
-            /** @type {?} */
-            var star = (/** @type {?} */ (event.srcElement));
-            /** @type {?} */
+        StarRatingComponent.prototype.onRate = function (event) {
+            if (this.readonly)
+                return;
+            var star = event.srcElement;
             var oldValue = this.value;
             this.value = parseInt(star.dataset.index);
             if (this.value == 0) {
                 this.value = 1;
             }
-            /** @type {?} */
             var rateValues = { oldValue: oldValue, newValue: this.value, starRating: this };
             this.rate.emit(rateValues);
         };
-        /**
-         * @private
-         * @param {?} event
-         * @return {?}
-         */
-        StarRatingComponent.prototype.onStar = /**
-         * @private
-         * @param {?} event
-         * @return {?}
-         */
-        function (event) {
-            /** @type {?} */
-            var star = (/** @type {?} */ (event.srcElement));
-            /** @type {?} */
+        StarRatingComponent.prototype.onStar = function (event) {
+            if (this.readonly)
+                return;
+            var star = event.srcElement;
             var currentIndex = parseInt(star.dataset.index);
             for (var index = 0; index < currentIndex; index++) {
                 this.stars[index].className = "";
@@ -373,214 +419,90 @@
                 this.addDefaultClass(this.stars[index]);
             }
         };
-        /**
-         * @private
-         * @param {?} event
-         * @return {?}
-         */
-        StarRatingComponent.prototype.offStar = /**
-         * @private
-         * @param {?} event
-         * @return {?}
-         */
-        function (event) {
+        StarRatingComponent.prototype.offStar = function (event) {
             this.generateRating();
         };
-        /**
-         * @private
-         * @param {?} star
-         * @return {?}
-         */
-        StarRatingComponent.prototype.addDefaultClass = /**
-         * @private
-         * @param {?} star
-         * @return {?}
-         */
-        function (star) {
-            star.classList.add(StarRatingComponent.CLS_DEFAULT_STAR);
+        StarRatingComponent.prototype.addDefaultClass = function (star) {
+            star.classList.add(StarRatingComponent_1.CLS_DEFAULT_STAR);
         };
-        /**
-         * @private
-         * @param {?} star
-         * @return {?}
-         */
-        StarRatingComponent.prototype.addCheckedStarClass = /**
-         * @private
-         * @param {?} star
-         * @return {?}
-         */
-        function (star) {
-            star.classList.add(StarRatingComponent.CLS_CHECKED_STAR);
+        StarRatingComponent.prototype.addCheckedStarClass = function (star) {
+            star.classList.add(StarRatingComponent_1.CLS_CHECKED_STAR);
         };
-        /**
-         * @private
-         * @param {?} star
-         * @return {?}
-         */
-        StarRatingComponent.prototype.addHalfStarClass = /**
-         * @private
-         * @param {?} star
-         * @return {?}
-         */
-        function (star) {
-            star.classList.add(StarRatingComponent.CLS_HALF_STAR);
+        StarRatingComponent.prototype.addHalfStarClass = function (star) {
+            star.classList.add(StarRatingComponent_1.CLS_HALF_STAR);
         };
-        /**
-         * @private
-         * @return {?}
-         */
-        StarRatingComponent.prototype.setStars = /**
-         * @private
-         * @return {?}
-         */
-        function () {
+        StarRatingComponent.prototype.setStars = function () {
             var _this = this;
-            /** @type {?} */
+            if (!this.mainElement)
+                return;
             var starContainer = this.mainElement.nativeElement;
-            /** @type {?} */
             var maxStars = __spread(Array(Number(this.totalstars)).keys());
             this.stars.length = 0;
             starContainer.innerHTML = "";
-            maxStars.forEach((/**
-             * @param {?} starNumber
-             * @return {?}
-             */
-            function (starNumber) {
-                /** @type {?} */
+            maxStars.forEach(function (starNumber) {
                 var starElement = document.createElement("span");
                 starElement.dataset.index = (starNumber + 1).toString();
                 starElement.title = starElement.dataset.index;
                 starContainer.appendChild(starElement);
                 _this.stars.push(starElement);
-            }));
+            });
         };
-        /**
-         * @private
-         * @return {?}
-         */
-        StarRatingComponent.prototype.applySizeAllStars = /**
-         * @private
-         * @return {?}
-         */
-        function () {
+        StarRatingComponent.prototype.applySizeAllStars = function () {
             var _this = this;
             if (this._size) {
                 this.stars.length == 0 && this.setStars();
-                this.stars.forEach((/**
-                 * @param {?} star
-                 * @return {?}
-                 */
-                function (star) {
-                    /** @type {?} */
+                this.stars.forEach(function (star) {
+                    // const newSize = this._size.match(/\d+/)[0];
+                    // let halfSize = parseInt(newSize, 10) / 2;
+                    // let halfMargin = 0 - parseInt(newSize, 10);        
                     var newSize = _this.size.match(/\d+/)[0];
-                    /** @type {?} */
                     var halfSize = (parseInt(newSize) * 10) / 24;
-                    /** @type {?} */
                     var halfMargin = 0 - ((parseInt(newSize) * 20) / 24);
-                    star.style.setProperty(StarRatingComponent.VAR_SIZE, _this.size);
-                    if (star.classList.contains(StarRatingComponent.CLS_HALF_STAR)) {
-                        star.style.setProperty(StarRatingComponent.VAR_HALF_WIDTH, halfSize + "px");
-                        star.style.setProperty(StarRatingComponent.VAR_HALF_MARGIN, halfMargin + "px");
+                    star.style.setProperty(StarRatingComponent_1.VAR_SIZE, _this.size);
+                    if (star.classList.contains(StarRatingComponent_1.CLS_HALF_STAR)) {
+                        star.style.setProperty(StarRatingComponent_1.VAR_HALF_WIDTH, halfSize + "px");
+                        star.style.setProperty(StarRatingComponent_1.VAR_HALF_MARGIN, halfMargin + "px");
                     }
-                }));
+                });
             }
         };
-        /**
-         * @private
-         * @param {?} setChecked
-         * @return {?}
-         */
-        StarRatingComponent.prototype.applyColorStyleAllStars = /**
-         * @private
-         * @param {?} setChecked
-         * @return {?}
-         */
-        function (setChecked) {
+        StarRatingComponent.prototype.applyColorStyleAllStars = function (setChecked) {
             var _this = this;
             this.stars.length == 0 && this.setStars();
-            this.stars.forEach((/**
-             * @param {?} star
-             * @return {?}
-             */
-            function (star) {
+            this.stars.forEach(function (star) {
                 if (setChecked) {
                     _this.applyCheckedColorStyle(star);
                 }
                 else {
                     _this.applyUnCheckedColorStyle(star);
                 }
-            }));
+            });
         };
-        /**
-         * @private
-         * @param {?} starElement
-         * @return {?}
-         */
-        StarRatingComponent.prototype.applyColorStyle = /**
-         * @private
-         * @param {?} starElement
-         * @return {?}
-         */
-        function (starElement) {
+        StarRatingComponent.prototype.applyColorStyle = function (starElement) {
             this.applyCheckedColorStyle(starElement);
             this.applyUnCheckedColorStyle(starElement);
         };
-        /**
-         * @private
-         * @param {?} starElement
-         * @return {?}
-         */
-        StarRatingComponent.prototype.applyCheckedColorStyle = /**
-         * @private
-         * @param {?} starElement
-         * @return {?}
-         */
-        function (starElement) {
-            starElement.style.setProperty(StarRatingComponent.VAR_CHECKED_COLOR, this.checkedcolor);
+        StarRatingComponent.prototype.applyCheckedColorStyle = function (starElement) {
+            starElement.style.setProperty(StarRatingComponent_1.VAR_CHECKED_COLOR, this.checkedcolor);
         };
-        /**
-         * @private
-         * @param {?} starElement
-         * @return {?}
-         */
-        StarRatingComponent.prototype.applyUnCheckedColorStyle = /**
-         * @private
-         * @param {?} starElement
-         * @return {?}
-         */
-        function (starElement) {
-            starElement.style.setProperty(StarRatingComponent.VAR_UNCHECKED_COLOR, this.uncheckedcolor);
+        StarRatingComponent.prototype.applyUnCheckedColorStyle = function (starElement) {
+            starElement.style.setProperty(StarRatingComponent_1.VAR_UNCHECKED_COLOR, this.uncheckedcolor);
         };
-        /**
-         * @private
-         * @param {?=} forceGenerate
-         * @return {?}
-         */
-        StarRatingComponent.prototype.generateRating = /**
-         * @private
-         * @param {?=} forceGenerate
-         * @return {?}
-         */
-        function (forceGenerate) {
+        StarRatingComponent.prototype.generateRating = function (forceGenerate) {
             var _this = this;
             if (forceGenerate === void 0) { forceGenerate = false; }
-            if (this.readonly && !forceGenerate) {
+            if (this.readonly && !forceGenerate)
                 return;
-            }
+            if (!this.mainElement)
+                return;
             this.stars.length == 0 && this.setStars();
             if (this.value >= 0) {
                 this.mainElement.nativeElement.title = this.value;
-                /** @type {?} */
                 var hasDecimals_1 = ((Number.parseFloat(this.value.toString()) % 1)
                     .toString()
                     .substring(3, 2)) ? true : false;
-                /** @type {?} */
                 var i_1 = 1;
-                this.stars.forEach((/**
-                 * @param {?} star
-                 * @return {?}
-                 */
-                function (star) {
+                this.stars.forEach(function (star) {
                     star.className = "";
                     _this.applyColorStyle(star);
                     _this.addDefaultClass(star);
@@ -596,9 +518,10 @@
                         }
                     }
                     i_1++;
-                }));
+                });
             }
         };
+        var StarRatingComponent_1;
         StarRatingComponent.VAR_CHECKED_COLOR = '--checkedColor';
         StarRatingComponent.VAR_UNCHECKED_COLOR = '--unCheckedColor';
         StarRatingComponent.VAR_SIZE = '--size';
@@ -613,57 +536,74 @@
         StarRatingComponent.INP_SIZE = 'size';
         StarRatingComponent.INP_READONLY = 'readonly';
         StarRatingComponent.INP_TOTALSTARS = 'totalstars';
-        StarRatingComponent.decorators = [
-            { type: core.Component, args: [{
-                        selector: 'star-rating',
-                        template: "<div #starMain>\r\n</div>",
-                        encapsulation: core.ViewEncapsulation.None,
-                        styles: [":root{--checkedColor:gold;--unCheckedColor:gray;--size:24px;--halfWidth:10px;--halfMargin:-20px}.star{cursor:pointer;color:var(--unCheckedColor);font-size:var(--size);width:var(--size);display:inline-block}.star:last-child{margin-right:0}.star:before{content:'\\2605'}.star.on{color:var(--checkedColor)}.star.half:after{content:'\\2605';color:var(--checkedColor);position:absolute;margin-left:var(--halfMargin);width:var(--halfWidth);overflow:hidden}"]
-                    }] }
-        ];
-        /** @nocollapse */
-        StarRatingComponent.ctorParameters = function () { return []; };
-        StarRatingComponent.propDecorators = {
-            mainElement: [{ type: core.ViewChild, args: ['starMain', { static: true },] }],
-            rate: [{ type: core.Output }],
-            checkedcolor: [{ type: core.Input, args: [StarRatingComponent.INP_CHECKED_COLOR,] }],
-            uncheckedcolor: [{ type: core.Input, args: [StarRatingComponent.INP_UNCHECKED_COLOR,] }],
-            value: [{ type: core.Input, args: [StarRatingComponent.INP_VALUE,] }],
-            size: [{ type: core.Input, args: [StarRatingComponent.INP_SIZE,] }],
-            readonly: [{ type: core.Input, args: [StarRatingComponent.INP_READONLY,] }],
-            totalstars: [{ type: core.Input, args: [StarRatingComponent.INP_TOTALSTARS,] }]
-        };
+        __decorate([
+            core.ViewChild('starMain', { static: true }),
+            __metadata("design:type", core.ElementRef)
+        ], StarRatingComponent.prototype, "mainElement", void 0);
+        __decorate([
+            core.Output(),
+            __metadata("design:type", core.EventEmitter)
+        ], StarRatingComponent.prototype, "rate", void 0);
+        __decorate([
+            core.Input(StarRatingComponent_1.INP_CHECKED_COLOR),
+            __metadata("design:type", String),
+            __metadata("design:paramtypes", [String])
+        ], StarRatingComponent.prototype, "checkedcolor", null);
+        __decorate([
+            core.Input(StarRatingComponent_1.INP_UNCHECKED_COLOR),
+            __metadata("design:type", String),
+            __metadata("design:paramtypes", [String])
+        ], StarRatingComponent.prototype, "uncheckedcolor", null);
+        __decorate([
+            core.Input(StarRatingComponent_1.INP_VALUE),
+            __metadata("design:type", Number),
+            __metadata("design:paramtypes", [Number])
+        ], StarRatingComponent.prototype, "value", null);
+        __decorate([
+            core.Input(StarRatingComponent_1.INP_SIZE),
+            __metadata("design:type", String),
+            __metadata("design:paramtypes", [String])
+        ], StarRatingComponent.prototype, "size", null);
+        __decorate([
+            core.Input(StarRatingComponent_1.INP_READONLY),
+            __metadata("design:type", Boolean),
+            __metadata("design:paramtypes", [Boolean])
+        ], StarRatingComponent.prototype, "readonly", null);
+        __decorate([
+            core.Input(StarRatingComponent_1.INP_TOTALSTARS),
+            __metadata("design:type", Number),
+            __metadata("design:paramtypes", [Number])
+        ], StarRatingComponent.prototype, "totalstars", null);
+        StarRatingComponent = StarRatingComponent_1 = __decorate([
+            core.Component({
+                selector: 'star-rating',
+                template: "<div #starMain>\r\n</div>\r\n\r\n<!-- <ng-container *ngFor=\"let star of stars; let i = index;\">\r\n    <span \r\n        (click)=\"!isReadOnly && onRate(i)\" \r\n        (mouseleave)=\"!isReadOnly && generateRating()\"\r\n        (mouseenter)=\"!isReadOnly && onStar(i)\" \r\n        [ngStyle]=\"{\r\n            'font-size': getSize(),\r\n            'width': getSize(),\r\n            pointer: isReadOnly ? 'default' : 'pointer'\r\n        }\" \r\n        [ngClass]=\"{\r\n            on: star.checked,\r\n            half: star.isHalf,\r\n            readOnly: isReadOnly,\r\n            editable: !isReadOnly\r\n        }\"></span>\r\n</ng-container> -->",
+                encapsulation: core.ViewEncapsulation.ShadowDom,
+                styles: [":root{--checkedColor:gold;--unCheckedColor:gray;--size:24px;--halfWidth:10px;--halfMargin:-20px}.star{cursor:pointer;color:var(--unCheckedColor);font-size:var(--size);width:var(--size);display:inline-block}.star:last-child{margin-right:0}.star:before{content:'\\2605'}.star.on{color:var(--checkedColor)}.star.half:after{content:'\\2605';color:var(--checkedColor);position:absolute;margin-left:var(--halfMargin);width:var(--halfWidth);overflow:hidden}"]
+            }),
+            __metadata("design:paramtypes", [])
+        ], StarRatingComponent);
         return StarRatingComponent;
     }());
 
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
     var RatingModule = /** @class */ (function () {
         function RatingModule() {
         }
-        /**
-         * @return {?}
-         */
-        RatingModule.prototype.ngDoBootstrap = /**
-         * @return {?}
-         */
-        function () { };
-        RatingModule.decorators = [
-            { type: core.NgModule, args: [{
-                        imports: [
-                            forms.FormsModule,
-                            common.CommonModule
-                        ],
-                        declarations: [
-                            RatingComponent,
-                            StarRatingComponent
-                        ],
-                        exports: [StarRatingComponent],
-                        entryComponents: [StarRatingComponent]
-                    },] }
-        ];
+        RatingModule.prototype.ngDoBootstrap = function () { };
+        RatingModule = __decorate([
+            core.NgModule({
+                imports: [
+                    forms.FormsModule,
+                    common.CommonModule
+                ],
+                declarations: [
+                    RatingComponent,
+                    StarRatingComponent
+                ],
+                exports: [StarRatingComponent],
+                entryComponents: [StarRatingComponent]
+            })
+        ], RatingModule);
         return RatingModule;
     }());
 
@@ -673,5 +613,5 @@
 
     Object.defineProperty(exports, '__esModule', { value: true });
 
-}));
+})));
 //# sourceMappingURL=ng-starrating.umd.js.map

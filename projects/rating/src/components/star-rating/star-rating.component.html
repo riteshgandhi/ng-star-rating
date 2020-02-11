@@ -1,2 +1,20 @@
 <div #starMain>
 </div>
+
+<!-- <ng-container *ngFor="let star of stars; let i = index;">
+    <span 
+        (click)="!isReadOnly && onRate(i)" 
+        (mouseleave)="!isReadOnly && generateRating()"
+        (mouseenter)="!isReadOnly && onStar(i)" 
+        [ngStyle]="{
+            'font-size': getSize(),
+            'width': getSize(),
+            pointer: isReadOnly ? 'default' : 'pointer'
+        }" 
+        [ngClass]="{
+            on: star.checked,
+            half: star.isHalf,
+            readOnly: isReadOnly,
+            editable: !isReadOnly
+        }"></span>
+</ng-container> -->

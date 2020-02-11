@@ -13,6 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "aot": true,
             "outputPath": "dist/rg-rating",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -29,6 +30,12 @@
           },
           "configurations": {
             "production": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -133,6 +140,11 @@
           "options": {
             "tsConfig": "projects/rating/tsconfig.lib.json",
             "project": "projects/rating/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/rating/tsconfig.lib.prod.json"
+            }
           }
         },
         "test": {
@@ -158,5 +170,8 @@
       }
     }
   },
-  "defaultProject": "rg-rating"
+  "defaultProject": "rg-rating",
+  "cli": {
+    "analytics": false
+  }
 }

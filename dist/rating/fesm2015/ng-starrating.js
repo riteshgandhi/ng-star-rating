@@ -1,39 +1,28 @@
-import { Component, EventEmitter, ViewEncapsulation, ViewChild, Output, Input, NgModule } from '@angular/core';
+import { __decorate, __metadata } from 'tslib';
+import { Component, EventEmitter, ViewChild, ElementRef, Output, Input, ViewEncapsulation, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Subject } from 'rxjs';
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-//import { StarRatingComponent } from '../components/star-rating/star-rating.component'
-class RatingComponent {
+let RatingComponent = class RatingComponent {
     constructor() { }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
     }
-}
-RatingComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'lib-rating',
-                template: `
+};
+RatingComponent = __decorate([
+    Component({
+        selector: 'lib-rating',
+        template: `
     <p>
       rating works!
     </p>
   `
-            }] }
-];
-/** @nocollapse */
-RatingComponent.ctorParameters = () => [];
+    }),
+    __metadata("design:paramtypes", [])
+], RatingComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class StarRatingComponent {
+var StarRatingComponent_1;
+let StarRatingComponent = StarRatingComponent_1 = class StarRatingComponent {
     constructor() {
         this.stars = [];
         this._readOnly = false;
@@ -41,235 +30,163 @@ class StarRatingComponent {
         this.rate = new EventEmitter();
         if (!this.onStarsCountChange) {
             this.onStarsCountChange = new Subject();
-            this.onStarsCountChange.subscribe((/**
-             * @return {?}
-             */
-            () => {
+            this.onStarsCountChange.subscribe(() => {
                 this.setStars();
                 this.generateRating(true);
                 this.applySizeAllStars();
                 this.applyColorStyleAllStars(false);
-                this.addRemoveEvents();
-            }));
+                this.addEvents();
+                //this.addRemoveEvents();
+            });
         }
         if (!this.onValueChange) {
             this.onValueChange = new Subject();
-            this.onValueChange.subscribe((/**
-             * @return {?}
-             */
-            () => {
+            this.onValueChange.subscribe(() => {
                 this.generateRating();
                 this.applySizeAllStars();
-            }));
+            });
         }
         if (!this.onCheckedColorChange) {
             this.onCheckedColorChange = new Subject();
-            this.onCheckedColorChange.subscribe((/**
-             * @return {?}
-             */
-            () => {
+            this.onCheckedColorChange.subscribe(() => {
                 this.applyColorStyleAllStars(true);
-            }));
+            });
         }
         if (!this.onUnCheckedColorChange) {
             this.onUnCheckedColorChange = new Subject();
-            this.onUnCheckedColorChange.subscribe((/**
-             * @return {?}
-             */
-            () => {
+            this.onUnCheckedColorChange.subscribe(() => {
                 this.applyColorStyleAllStars(false);
-            }));
+            });
         }
         if (!this.onSizeChange) {
             this.onSizeChange = new Subject();
-            this.onSizeChange.subscribe((/**
-             * @return {?}
-             */
-            () => {
+            this.onSizeChange.subscribe(() => {
                 this.applySizeAllStars();
-            }));
+            });
         }
         if (!this.onReadOnlyChange) {
             this.onReadOnlyChange = new Subject();
-            this.onReadOnlyChange.subscribe((/**
-             * @return {?}
-             */
-            () => {
-                this.addRemoveEvents();
-            }));
+            this.onReadOnlyChange.subscribe(() => {
+                this.readonly ? this.makeReadOnly() : this.makeEditable();
+                //this.addRemoveEvents();
+            });
         }
     }
-    /**
-     * @return {?}
-     */
     get checkedcolor() {
         return this._checkedColor;
     }
-    /**
-     * @return {?}
-     */
     get uncheckedcolor() {
         return this._unCheckedColor;
     }
-    /**
-     * @return {?}
-     */
     get value() {
         return this._value;
     }
-    /**
-     * @return {?}
-     */
     get size() {
         return this._size.concat((!this._size.includes("px") ? "px" : ""));
     }
-    /**
-     * @return {?}
-     */
     get readonly() {
         return String(this._readOnly) === "true";
     }
-    /**
-     * @return {?}
-     */
     get totalstars() {
         return this._totalStars;
     }
-    /**
-     * @param {?} value
-     * @return {?}
-     */
     set checkedcolor(value) {
         this._checkedColor = value;
         this._checkedColor && this.onCheckedColorChange.next(this._checkedColor);
     }
-    /**
-     * @param {?} value
-     * @return {?}
-     */
     set uncheckedcolor(value) {
         this._unCheckedColor = value;
         this._unCheckedColor && this.onUnCheckedColorChange.next(this._unCheckedColor);
     }
-    /**
-     * @param {?} value
-     * @return {?}
-     */
     set value(value) {
         value = (!value || value == null) ? 0 : value;
-        value > this.stars.length && (value = this.stars.length);
         this._value = value;
         this._value >= 0 && this.onValueChange.next(this._value);
     }
-    /**
-     * @param {?} value
-     * @return {?}
-     */
     set size(value) {
         value = (!value || value == null || value == "0px") ? "24px" : value;
         this._size = value;
         this.onSizeChange.next(this._size);
     }
-    /**
-     * @param {?} value
-     * @return {?}
-     */
     set readonly(value) {
         this._readOnly = value;
         this.onReadOnlyChange.next(value);
     }
-    /**
-     * @param {?} value
-     * @return {?}
-     */
     set totalstars(value) {
         this._totalStars = value <= 0 ? 5 : value;
         this.onStarsCountChange.next(Number(value));
     }
-    /**
-     * @private
-     * @return {?}
-     */
+    // private makeEditable() {
+    //   if (!this.mainElement) return;
+    //   this.mainElement.nativeElement.addEventListener('mouseleave', this.offStar.bind(this));
+    //   this.mainElement.nativeElement.style.cursor = "pointer";
+    //   this.mainElement.nativeElement.title = this.value;
+    //   this.stars.forEach((star: any) => {
+    //     star.addEventListener('click', this.onRate.bind(this));
+    //     star.addEventListener('mouseenter', this.onStar.bind(this));
+    //     star.style.cursor = "pointer";
+    //     star.title = star.dataset.index;
+    //   });
+    // }
     makeEditable() {
+        if (!this.mainElement)
+            return;
+        this.mainElement.nativeElement.style.cursor = "pointer";
+        this.mainElement.nativeElement.title = this.value;
+        this.stars.forEach((star) => {
+            star.style.cursor = "pointer";
+            star.title = star.dataset.index;
+        });
+    }
+    makeReadOnly() {
+        if (!this.mainElement)
+            return;
+        this.mainElement.nativeElement.style.cursor = "default";
+        this.mainElement.nativeElement.title = this.value;
+        this.stars.forEach((star) => {
+            star.style.cursor = "default";
+            star.title = "";
+        });
+    }
+    // private addRemoveEvents() {
+    //   if (this.readonly) {
+    //     this.makeReadOnly();
+    //   } else {
+    //     this.makeEditable();
+    //     this.onValueChange.next(this.value);
+    //   }
+    // }
+    addEvents() {
+        if (!this.mainElement)
+            return;
         this.mainElement.nativeElement.addEventListener('mouseleave', this.offStar.bind(this));
         this.mainElement.nativeElement.style.cursor = "pointer";
         this.mainElement.nativeElement.title = this.value;
-        this.stars.forEach((/**
-         * @param {?} star
-         * @return {?}
-         */
-        (star) => {
+        this.stars.forEach((star) => {
             star.addEventListener('click', this.onRate.bind(this));
             star.addEventListener('mouseenter', this.onStar.bind(this));
             star.style.cursor = "pointer";
             star.title = star.dataset.index;
-        }));
+        });
     }
-    /**
-     * @private
-     * @return {?}
-     */
-    makeReadOnly() {
-        this.mainElement.nativeElement.__zone_symbol__mouseleavefalse = null;
-        this.mainElement.nativeElement.style.cursor = "default";
-        this.mainElement.nativeElement.title = this.value;
-        this.stars.forEach((/**
-         * @param {?} star
-         * @return {?}
-         */
-        (star) => {
-            star.__zone_symbol__clickfalse = null;
-            star.__zone_symbol__mouseenterfalse = null;
-            star.style.cursor = "default";
-            star.title = "";
-        }));
-    }
-    /**
-     * @private
-     * @return {?}
-     */
-    addRemoveEvents() {
-        if (this.readonly) {
-            this.makeReadOnly();
-        }
-        else {
-            this.makeEditable();
-            this.onValueChange.next(this.value);
-        }
-    }
-    /**
-     * @private
-     * @return {?}
-     */
     ngAfterViewInit() {
     }
-    /**
-     * @private
-     * @param {?} event
-     * @return {?}
-     */
     onRate(event) {
-        /** @type {?} */
-        let star = (/** @type {?} */ (event.srcElement));
-        /** @type {?} */
+        if (this.readonly)
+            return;
+        let star = event.srcElement;
         let oldValue = this.value;
         this.value = parseInt(star.dataset.index);
         if (this.value == 0) {
             this.value = 1;
         }
-        /** @type {?} */
         let rateValues = { oldValue: oldValue, newValue: this.value, starRating: this };
         this.rate.emit(rateValues);
     }
-    /**
-     * @private
-     * @param {?} event
-     * @return {?}
-     */
     onStar(event) {
-        /** @type {?} */
-        let star = (/** @type {?} */ (event.srcElement));
-        /** @type {?} */
+        if (this.readonly)
+            return;
+        let star = event.srcElement;
         let currentIndex = parseInt(star.dataset.index);
         for (let index = 0; index < currentIndex; index++) {
             this.stars[index].className = "";
@@ -281,156 +198,85 @@ class StarRatingComponent {
             this.addDefaultClass(this.stars[index]);
         }
     }
-    /**
-     * @private
-     * @param {?} event
-     * @return {?}
-     */
     offStar(event) {
         this.generateRating();
     }
-    /**
-     * @private
-     * @param {?} star
-     * @return {?}
-     */
     addDefaultClass(star) {
-        star.classList.add(StarRatingComponent.CLS_DEFAULT_STAR);
+        star.classList.add(StarRatingComponent_1.CLS_DEFAULT_STAR);
     }
-    /**
-     * @private
-     * @param {?} star
-     * @return {?}
-     */
     addCheckedStarClass(star) {
-        star.classList.add(StarRatingComponent.CLS_CHECKED_STAR);
+        star.classList.add(StarRatingComponent_1.CLS_CHECKED_STAR);
     }
-    /**
-     * @private
-     * @param {?} star
-     * @return {?}
-     */
     addHalfStarClass(star) {
-        star.classList.add(StarRatingComponent.CLS_HALF_STAR);
+        star.classList.add(StarRatingComponent_1.CLS_HALF_STAR);
     }
-    /**
-     * @private
-     * @return {?}
-     */
     setStars() {
-        /** @type {?} */
+        if (!this.mainElement)
+            return;
         let starContainer = this.mainElement.nativeElement;
-        /** @type {?} */
         let maxStars = [...Array(Number(this.totalstars)).keys()];
         this.stars.length = 0;
         starContainer.innerHTML = "";
-        maxStars.forEach((/**
-         * @param {?} starNumber
-         * @return {?}
-         */
-        starNumber => {
-            /** @type {?} */
+        maxStars.forEach(starNumber => {
             let starElement = document.createElement("span");
             starElement.dataset.index = (starNumber + 1).toString();
             starElement.title = starElement.dataset.index;
             starContainer.appendChild(starElement);
             this.stars.push(starElement);
-        }));
+        });
     }
-    /**
-     * @private
-     * @return {?}
-     */
     applySizeAllStars() {
         if (this._size) {
             this.stars.length == 0 && this.setStars();
-            this.stars.forEach((/**
-             * @param {?} star
-             * @return {?}
-             */
-            (star) => {
-                /** @type {?} */
+            this.stars.forEach((star) => {
+                // const newSize = this._size.match(/\d+/)[0];
+                // let halfSize = parseInt(newSize, 10) / 2;
+                // let halfMargin = 0 - parseInt(newSize, 10);        
                 let newSize = this.size.match(/\d+/)[0];
-                /** @type {?} */
                 let halfSize = (parseInt(newSize) * 10) / 24;
-                /** @type {?} */
                 let halfMargin = 0 - ((parseInt(newSize) * 20) / 24);
-                star.style.setProperty(StarRatingComponent.VAR_SIZE, this.size);
-                if (star.classList.contains(StarRatingComponent.CLS_HALF_STAR)) {
-                    star.style.setProperty(StarRatingComponent.VAR_HALF_WIDTH, `${halfSize}px`);
-                    star.style.setProperty(StarRatingComponent.VAR_HALF_MARGIN, `${halfMargin}px`);
+                star.style.setProperty(StarRatingComponent_1.VAR_SIZE, this.size);
+                if (star.classList.contains(StarRatingComponent_1.CLS_HALF_STAR)) {
+                    star.style.setProperty(StarRatingComponent_1.VAR_HALF_WIDTH, `${halfSize}px`);
+                    star.style.setProperty(StarRatingComponent_1.VAR_HALF_MARGIN, `${halfMargin}px`);
                 }
-            }));
+            });
         }
     }
-    /**
-     * @private
-     * @param {?} setChecked
-     * @return {?}
-     */
     applyColorStyleAllStars(setChecked) {
         this.stars.length == 0 && this.setStars();
-        this.stars.forEach((/**
-         * @param {?} star
-         * @return {?}
-         */
-        (star) => {
+        this.stars.forEach((star) => {
             if (setChecked) {
                 this.applyCheckedColorStyle(star);
             }
             else {
                 this.applyUnCheckedColorStyle(star);
             }
-        }));
+        });
     }
-    /**
-     * @private
-     * @param {?} starElement
-     * @return {?}
-     */
     applyColorStyle(starElement) {
         this.applyCheckedColorStyle(starElement);
         this.applyUnCheckedColorStyle(starElement);
     }
-    /**
-     * @private
-     * @param {?} starElement
-     * @return {?}
-     */
     applyCheckedColorStyle(starElement) {
-        starElement.style.setProperty(StarRatingComponent.VAR_CHECKED_COLOR, this.checkedcolor);
+        starElement.style.setProperty(StarRatingComponent_1.VAR_CHECKED_COLOR, this.checkedcolor);
     }
-    /**
-     * @private
-     * @param {?} starElement
-     * @return {?}
-     */
     applyUnCheckedColorStyle(starElement) {
-        starElement.style.setProperty(StarRatingComponent.VAR_UNCHECKED_COLOR, this.uncheckedcolor);
+        starElement.style.setProperty(StarRatingComponent_1.VAR_UNCHECKED_COLOR, this.uncheckedcolor);
     }
-    /**
-     * @private
-     * @param {?=} forceGenerate
-     * @return {?}
-     */
     generateRating(forceGenerate = false) {
-        if (this.readonly && !forceGenerate) {
+        if (this.readonly && !forceGenerate)
             return;
-        }
+        if (!this.mainElement)
+            return;
         this.stars.length == 0 && this.setStars();
         if (this.value >= 0) {
             this.mainElement.nativeElement.title = this.value;
-            /** @type {?} */
             let hasDecimals = ((Number.parseFloat(this.value.toString()) % 1)
                 .toString()
                 .substring(3, 2)) ? true : false;
-            /** @type {?} */
             let i = 1;
-            this.stars.forEach((/**
-             * @param {?} star
-             * @return {?}
-             */
-            (star) => {
+            this.stars.forEach((star) => {
                 star.className = "";
                 this.applyColorStyle(star);
                 this.addDefaultClass(star);
@@ -446,10 +292,10 @@ class StarRatingComponent {
                     }
                 }
                 i++;
-            }));
+            });
         }
     }
-}
+};
 StarRatingComponent.VAR_CHECKED_COLOR = '--checkedColor';
 StarRatingComponent.VAR_UNCHECKED_COLOR = '--unCheckedColor';
 StarRatingComponent.VAR_SIZE = '--size';
@@ -464,51 +310,79 @@ StarRatingComponent.INP_VALUE = 'value';
 StarRatingComponent.INP_SIZE = 'size';
 StarRatingComponent.INP_READONLY = 'readonly';
 StarRatingComponent.INP_TOTALSTARS = 'totalstars';
-StarRatingComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'star-rating',
-                template: "<div #starMain>\r\n</div>",
-                encapsulation: ViewEncapsulation.None,
-                styles: [":root{--checkedColor:gold;--unCheckedColor:gray;--size:24px;--halfWidth:10px;--halfMargin:-20px}.star{cursor:pointer;color:var(--unCheckedColor);font-size:var(--size);width:var(--size);display:inline-block}.star:last-child{margin-right:0}.star:before{content:'\\2605'}.star.on{color:var(--checkedColor)}.star.half:after{content:'\\2605';color:var(--checkedColor);position:absolute;margin-left:var(--halfMargin);width:var(--halfWidth);overflow:hidden}"]
-            }] }
-];
-/** @nocollapse */
-StarRatingComponent.ctorParameters = () => [];
-StarRatingComponent.propDecorators = {
-    mainElement: [{ type: ViewChild, args: ['starMain', { static: true },] }],
-    rate: [{ type: Output }],
-    checkedcolor: [{ type: Input, args: [StarRatingComponent.INP_CHECKED_COLOR,] }],
-    uncheckedcolor: [{ type: Input, args: [StarRatingComponent.INP_UNCHECKED_COLOR,] }],
-    value: [{ type: Input, args: [StarRatingComponent.INP_VALUE,] }],
-    size: [{ type: Input, args: [StarRatingComponent.INP_SIZE,] }],
-    readonly: [{ type: Input, args: [StarRatingComponent.INP_READONLY,] }],
-    totalstars: [{ type: Input, args: [StarRatingComponent.INP_TOTALSTARS,] }]
+__decorate([
+    ViewChild('starMain', { static: true }),
+    __metadata("design:type", ElementRef)
+], StarRatingComponent.prototype, "mainElement", void 0);
+__decorate([
+    Output(),
+    __metadata("design:type", EventEmitter)
+], StarRatingComponent.prototype, "rate", void 0);
+__decorate([
+    Input(StarRatingComponent_1.INP_CHECKED_COLOR),
+    __metadata("design:type", String),
+    __metadata("design:paramtypes", [String])
+], StarRatingComponent.prototype, "checkedcolor", null);
+__decorate([
+    Input(StarRatingComponent_1.INP_UNCHECKED_COLOR),
+    __metadata("design:type", String),
+    __metadata("design:paramtypes", [String])
+], StarRatingComponent.prototype, "uncheckedcolor", null);
+__decorate([
+    Input(StarRatingComponent_1.INP_VALUE),
+    __metadata("design:type", Number),
+    __metadata("design:paramtypes", [Number])
+], StarRatingComponent.prototype, "value", null);
+__decorate([
+    Input(StarRatingComponent_1.INP_SIZE),
+    __metadata("design:type", String),
+    __metadata("design:paramtypes", [String])
+], StarRatingComponent.prototype, "size", null);
+__decorate([
+    Input(StarRatingComponent_1.INP_READONLY),
+    __metadata("design:type", Boolean),
+    __metadata("design:paramtypes", [Boolean])
+], StarRatingComponent.prototype, "readonly", null);
+__decorate([
+    Input(StarRatingComponent_1.INP_TOTALSTARS),
+    __metadata("design:type", Number),
+    __metadata("design:paramtypes", [Number])
+], StarRatingComponent.prototype, "totalstars", null);
+StarRatingComponent = StarRatingComponent_1 = __decorate([
+    Component({
+        selector: 'star-rating',
+        template: "<div #starMain>\r\n</div>\r\n\r\n<!-- <ng-container *ngFor=\"let star of stars; let i = index;\">\r\n    <span \r\n        (click)=\"!isReadOnly && onRate(i)\" \r\n        (mouseleave)=\"!isReadOnly && generateRating()\"\r\n        (mouseenter)=\"!isReadOnly && onStar(i)\" \r\n        [ngStyle]=\"{\r\n            'font-size': getSize(),\r\n            'width': getSize(),\r\n            pointer: isReadOnly ? 'default' : 'pointer'\r\n        }\" \r\n        [ngClass]=\"{\r\n            on: star.checked,\r\n            half: star.isHalf,\r\n            readOnly: isReadOnly,\r\n            editable: !isReadOnly\r\n        }\"></span>\r\n</ng-container> -->",
+        encapsulation: ViewEncapsulation.ShadowDom,
+        styles: [":root{--checkedColor:gold;--unCheckedColor:gray;--size:24px;--halfWidth:10px;--halfMargin:-20px}.star{cursor:pointer;color:var(--unCheckedColor);font-size:var(--size);width:var(--size);display:inline-block}.star:last-child{margin-right:0}.star:before{content:'\\2605'}.star.on{color:var(--checkedColor)}.star.half:after{content:'\\2605';color:var(--checkedColor);position:absolute;margin-left:var(--halfMargin);width:var(--halfWidth);overflow:hidden}"]
+    }),
+    __metadata("design:paramtypes", [])
+], StarRatingComponent);
+
+let RatingModule = class RatingModule {
+    ngDoBootstrap() { }
 };
+RatingModule = __decorate([
+    NgModule({
+        imports: [
+            FormsModule,
+            CommonModule
+        ],
+        declarations: [
+            RatingComponent,
+            StarRatingComponent
+        ],
+        exports: [StarRatingComponent],
+        entryComponents: [StarRatingComponent]
+    })
+], RatingModule);
+
+/*
+ * Public API Surface of rating
+ */
 
 /**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * Generated bundle index. Do not edit.
  */
-class RatingModule {
-    /**
-     * @return {?}
-     */
-    ngDoBootstrap() { }
-}
-RatingModule.decorators = [
-    { type: NgModule, args: [{
-                imports: [
-                    FormsModule,
-                    CommonModule
-                ],
-                declarations: [
-                    RatingComponent,
-                    StarRatingComponent
-                ],
-                exports: [StarRatingComponent],
-                entryComponents: [StarRatingComponent]
-            },] }
-];
 
 export { RatingModule, StarRatingComponent, RatingComponent as ɵa };
 //# sourceMappingURL=ng-starrating.js.map
