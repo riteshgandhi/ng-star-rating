@@ -15,7 +15,6 @@ Edge browser support: Import webcomponents bundle for Edge browser
 <script src="https://cdn.jsdelivr.net/npm/@webcomponents/webcomponentsjs@2.4.1/webcomponents-bundle.min.js"></script>
 ```
 =======
->>>>>>> origin/master
 
 ## Why it's better
 
