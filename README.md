@@ -8,11 +8,14 @@ Simple, highly Customizable and Responsive Star Rating Library built using Angul
 For production, use the files from the `dist/` folder.
 
 [Demo](https://ng-starratingdemo.stackblitz.io/)
+<<<<<<< HEAD
 
 Edge browser support: Import webcomponents bundle for Edge browser
 ```
 <script src="https://cdn.jsdelivr.net/npm/@webcomponents/webcomponentsjs@2.4.1/webcomponents-bundle.min.js"></script>
 ```
+=======
+>>>>>>> origin/master
 
 ## Why it's better
 
