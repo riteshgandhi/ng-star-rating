@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { ratingElement } from '../app/ratingElement';
 //import { StarRatingComponent } from '../../projects/rating/src/components/star-rating/star-rating.component';
-//import { StarRatingComponent } from './../../dist/rating/components/star-rating/star-rating.component';
-import { StarRatingComponent } from 'ng-starrating';
+import { StarRatingComponent } from './../../dist/rating/components/star-rating/star-rating.component';
+//import { StarRatingComponent } from 'ng-starrating';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',

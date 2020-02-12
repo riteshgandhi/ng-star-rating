@@ -1,6 +1,6 @@
 # ng-starrating
 
-[![npm version](https://img.shields.io/badge/npm-v1.0.14-brightgreen.svg)](https://www.npmjs.com/package/ng-starrating/v/1.0.14)
+[![npm version](https://img.shields.io/badge/npm-v1.0.15-brightgreen.svg)](https://www.npmjs.com/package/ng-starrating/v/1.0.15)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/riteshgandhi/ng-star-rating)
 
 Simple, highly Customizable and Responsive Star Rating Library built using Angular.
@@ -151,7 +151,10 @@ All changes should be committed to the files in `src/`.
 
 ## Changelog
 
+`v1.0.15 - [2020-02-11]`
+
 `v1.0.14 - [2020-02-11]`
+
 `v1.0.13 - [2020-02-11]`
 - minor fixes 
 

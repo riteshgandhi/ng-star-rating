@@ -231,7 +231,6 @@
                     _this.applySizeAllStars();
                     _this.applyColorStyleAllStars(false);
                     _this.addEvents();
-                    //this.addRemoveEvents();
                 });
             }
             if (!this.onValueChange) {
@@ -263,7 +262,6 @@
                 this.onReadOnlyChange = new rxjs.Subject();
                 this.onReadOnlyChange.subscribe(function () {
                     _this.readonly ? _this.makeReadOnly() : _this.makeEditable();
-                    //this.addRemoveEvents();
                 });
             }
         }
@@ -330,24 +328,12 @@
                 return this._totalStars;
             },
             set: function (value) {
-                this._totalStars = value <= 0 ? 5 : value;
-                this.onStarsCountChange.next(Number(value));
+                this._totalStars = value <= 0 ? 5 : Math.round(value);
+                this.onStarsCountChange.next(this._totalStars);
             },
             enumerable: true,
             configurable: true
         });
-        // private makeEditable() {
-        //   if (!this.mainElement) return;
-        //   this.mainElement.nativeElement.addEventListener('mouseleave', this.offStar.bind(this));
-        //   this.mainElement.nativeElement.style.cursor = "pointer";
-        //   this.mainElement.nativeElement.title = this.value;
-        //   this.stars.forEach((star: any) => {
-        //     star.addEventListener('click', this.onRate.bind(this));
-        //     star.addEventListener('mouseenter', this.onStar.bind(this));
-        //     star.style.cursor = "pointer";
-        //     star.title = star.dataset.index;
-        //   });
-        // }
         StarRatingComponent.prototype.makeEditable = function () {
             if (!this.mainElement)
                 return;
@@ -368,14 +354,6 @@
                 star.title = "";
             });
         };
-        // private addRemoveEvents() {
-        //   if (this.readonly) {
-        //     this.makeReadOnly();
-        //   } else {
-        //     this.makeEditable();
-        //     this.onValueChange.next(this.value);
-        //   }
-        // }
         StarRatingComponent.prototype.addEvents = function () {
             var _this = this;
             if (!this.mainElement)

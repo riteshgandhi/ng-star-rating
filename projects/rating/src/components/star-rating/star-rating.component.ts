@@ -52,7 +52,6 @@ export class StarRatingComponent {
         this.applySizeAllStars();
         this.applyColorStyleAllStars(false);
         this.addEvents();
-        //this.addRemoveEvents();
       });
     }
 
@@ -89,7 +88,6 @@ export class StarRatingComponent {
       this.onReadOnlyChange = new Subject();
       this.onReadOnlyChange.subscribe(() => {
         this.readonly ? this.makeReadOnly() : this.makeEditable();
-        //this.addRemoveEvents();
       });
     }
   }
@@ -148,22 +146,9 @@ export class StarRatingComponent {
   }
 
   @Input(StarRatingComponent.INP_TOTALSTARS) set totalstars(value: number) {
-    this._totalStars = value <= 0 ? 5 : value;
-    this.onStarsCountChange.next(Number(value));
+    this._totalStars = value <= 0 ? 5 : Math.round(value);
+    this.onStarsCountChange.next(this._totalStars);
   }
-
-  // private makeEditable() {
-  //   if (!this.mainElement) return;
-  //   this.mainElement.nativeElement.addEventListener('mouseleave', this.offStar.bind(this));
-  //   this.mainElement.nativeElement.style.cursor = "pointer";
-  //   this.mainElement.nativeElement.title = this.value;
-  //   this.stars.forEach((star: any) => {
-  //     star.addEventListener('click', this.onRate.bind(this));
-  //     star.addEventListener('mouseenter', this.onStar.bind(this));
-  //     star.style.cursor = "pointer";
-  //     star.title = star.dataset.index;
-  //   });
-  // }
 
   private makeEditable() {
     if (!this.mainElement) return;
@@ -184,15 +169,6 @@ export class StarRatingComponent {
       star.title = "";
     });
   }
-
-  // private addRemoveEvents() {
-  //   if (this.readonly) {
-  //     this.makeReadOnly();
-  //   } else {
-  //     this.makeEditable();
-  //     this.onValueChange.next(this.value);
-  //   }
-  // }
 
   private addEvents() {
     if (!this.mainElement) return;
