@@ -1,6 +1,6 @@
 # ng-starrating
 
-[![npm version](https://img.shields.io/badge/npm-v1.0.15-brightgreen.svg)](https://www.npmjs.com/package/ng-starrating/v/1.0.15)
+[![npm version](https://img.shields.io/badge/npm-v1.0.16-brightgreen.svg)](https://www.npmjs.com/package/ng-starrating/v/1.0.16)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/riteshgandhi/ng-star-rating)
 
 Simple, highly Customizable and Responsive Star Rating Library built using Angular.
@@ -150,6 +150,9 @@ Star Rating uses [npm](https://www.npmjs.com/get-npm) to manage package dependen
 All changes should be committed to the files in `src/`.
 
 ## Changelog
+
+`v1.0.16 - [2020-02-15]`
+- Fixed issues with Angular 9 upgrade. Star Rating now works with Ivy renderer
 
 `v1.0.15 - [2020-02-11]`
 

@@ -1,5 +1,7 @@
-import { Component, Input, Output, ViewChild, ElementRef, 
-  EventEmitter, ViewEncapsulation } from '@angular/core';
+import {
+  Component, Input, Output, ViewChild, ElementRef,
+  EventEmitter, ViewEncapsulation
+} from '@angular/core';
 import { Subject } from 'rxjs';
 
 @Component({
@@ -11,7 +13,7 @@ import { Subject } from 'rxjs';
 
 export class StarRatingComponent {
   private stars: Array<Element> = [];
-  
+
   private _checkedColor: string;
   private _unCheckedColor: string;
   private _value: number;
@@ -44,52 +46,40 @@ export class StarRatingComponent {
   @ViewChild('starMain', { static: true }) private mainElement: ElementRef;
 
   constructor() {
-    if (!this.onStarsCountChange) {
-      this.onStarsCountChange = new Subject();
-      this.onStarsCountChange.subscribe(() => {
-        this.setStars();
-        this.generateRating(true);
-        this.applySizeAllStars();
-        this.applyColorStyleAllStars(false);
-        this.addEvents();
-      });
-    }
+    this.onStarsCountChange = new Subject();
+    this.onStarsCountChange.subscribe(() => {
+      this.setStars();
+      this.generateRating(true);
+      this.applySizeAllStars();
+      this.applyColorStyleAllStars(false);
+      this.addEvents();
+    });
 
-    if (!this.onValueChange) {
-      this.onValueChange = new Subject();
-      this.onValueChange.subscribe(() => {
-        this.generateRating();
-        this.applySizeAllStars();
-      });
-    }
+    this.onValueChange = new Subject();
+    this.onValueChange.subscribe(() => {
+      this.generateRating();
+      this.applySizeAllStars();
+    });
 
-    if (!this.onCheckedColorChange) {
-      this.onCheckedColorChange = new Subject();
-      this.onCheckedColorChange.subscribe(() => {
-        this.applyColorStyleAllStars(true);
-      });
-    }
+    this.onCheckedColorChange = new Subject();
+    this.onCheckedColorChange.subscribe(() => {
+      this.applyColorStyleAllStars(true);
+    });
 
-    if (!this.onUnCheckedColorChange) {
-      this.onUnCheckedColorChange = new Subject();
-      this.onUnCheckedColorChange.subscribe(() => {
-        this.applyColorStyleAllStars(false);
-      });
-    }
+    this.onUnCheckedColorChange = new Subject();
+    this.onUnCheckedColorChange.subscribe(() => {
+      this.applyColorStyleAllStars(false);
+    });
 
-    if (!this.onSizeChange) {
-      this.onSizeChange = new Subject();
-      this.onSizeChange.subscribe(() => {
-        this.applySizeAllStars();
-      });
-    }
+    this.onSizeChange = new Subject();
+    this.onSizeChange.subscribe(() => {
+      this.applySizeAllStars();
+    });
 
-    if (!this.onReadOnlyChange) {
-      this.onReadOnlyChange = new Subject();
-      this.onReadOnlyChange.subscribe(() => {
-        this.readonly ? this.makeReadOnly() : this.makeEditable();
-      });
-    }
+    this.onReadOnlyChange = new Subject();
+    this.onReadOnlyChange.subscribe(() => {
+      this.readonly ? this.makeReadOnly() : this.makeEditable();
+    });
   }
 
   get checkedcolor(): string {
@@ -192,9 +182,9 @@ export class StarRatingComponent {
     let star: HTMLElement = <HTMLElement>event.srcElement;
     let oldValue = this.value;
     this.value = parseInt(star.dataset.index);
-    if (this.value == 0) {
-      this.value = 1;
-    }
+    // if (this.value == 0) {
+    //   this.value = 1;
+    // }
     let rateValues = { oldValue: oldValue, newValue: this.value, starRating: this };
     this.rate.emit(rateValues);
   }
@@ -251,9 +241,6 @@ export class StarRatingComponent {
     if (this._size) {
       this.stars.length == 0 && this.setStars();
       this.stars.forEach((star: any) => {
-        // const newSize = this._size.match(/\d+/)[0];
-        // let halfSize = parseInt(newSize, 10) / 2;
-        // let halfMargin = 0 - parseInt(newSize, 10);        
         let newSize = this.size.match(/\d+/)[0];
         let halfSize = (parseInt(newSize) * 10) / 24;
         let halfMargin = 0 - ((parseInt(newSize) * 20) / 24);
@@ -290,36 +277,37 @@ export class StarRatingComponent {
     starElement.style.setProperty(StarRatingComponent.VAR_UNCHECKED_COLOR, this.uncheckedcolor);
   }
 
-  private generateRating(forceGenerate:boolean = false) {
-    if (this.readonly && !forceGenerate) return;
+  private generateRating(forceGenerate: boolean = false) {
     if (!this.mainElement) return;
+    if (this.readonly && !forceGenerate) return;
+
+    //if (this.value >= 0) {
     this.stars.length == 0 && this.setStars();
-    if (this.value >= 0) {
-      this.mainElement.nativeElement.title = this.value;
+    this.mainElement.nativeElement.title = this.value;
 
-      let hasDecimals: boolean =
-        ((Number.parseFloat(this.value.toString()) % 1)
-          .toString()
-          .substring(3, 2)) ? true : false;
+    let hasDecimals: boolean =
+      ((Number.parseFloat(this.value.toString()) % 1)
+        .toString()
+        .substring(3, 2)) ? true : false;
 
-      let i = 1;
-      this.stars.forEach((star: any) => {
-        star.className = "";
-        this.applyColorStyle(star);
-        this.addDefaultClass(star);
+    let i = 1;
+    this.stars.forEach((star: any) => {
+      star.className = "";
+      this.applyColorStyle(star);
+      this.addDefaultClass(star);
 
-        if (this.value >= i) {
-          // star on
-          this.addCheckedStarClass(star);
-        } else {
-          // half star
-          if (hasDecimals) {
-            this.addHalfStarClass(star);
-            hasDecimals = false;
-          }
+      if (this.value >= i) {
+        // star on
+        this.addCheckedStarClass(star);
+      } else {
+        // half star
+        if (hasDecimals) {
+          this.addHalfStarClass(star);
+          hasDecimals = false;
         }
-        i++;
-      });
-    }
+      }
+      i++;
+    });
+    //}
   }
 }

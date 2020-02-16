@@ -15,4 +15,4 @@ import { StarRatingComponent } from '../components/star-rating/star-rating.compo
   exports: [StarRatingComponent],
   entryComponents: [StarRatingComponent]
 })
-export class RatingModule { ngDoBootstrap() {} }
+export class RatingModule {ngDoBootstrap() {}}

@@ -1,50 +1,50 @@
 <table>
-    <thead>
-        <tr>
-            <th>Checked Color</th>
-            <th>UnChecked Color</th>
-            <th>Rating Value</th>
-            <th>Size</th>
-            <th>Read Only</th>
-            <th>Total Stars</th>
-            <th>Star Rating</th>
-        </tr>
-    </thead>
-    <colgroup>
-        <col span="1">
-        <col span="1">
-        <col span="1">
-        <col span="1">
-        <col span="1">
-        <col span="1">
-        <col span="1">
-    </colgroup>
-    <tbody>
-        <tr *ngFor="let element of starRatingElements">
-            <td data-th="Checked Color">
-                <input type="text" [(ngModel)]="element.checkedcolor" value="{{element.checkedcolor}}">
-            </td>
-            <td data-th="UnChecked Color">
-                <input type="text" [(ngModel)]="element.uncheckedcolor" value="{{element.uncheckedcolor}}">
-            </td>
-            <td data-th="Rating Value">
-                <input type="number" [(ngModel)]="element.value" [(value)]="starrating.value">
-            </td>
-            <td data-th="Size">
-                <input type="number" [(ngModel)]="element.size" value="{{element.size}}">
-            </td>
-            <td data-th="Read Only">
-                <input type="checkbox" [(ngModel)]="element.readonly" value="{{element.readonly}}">
-            </td>
-            <td data-th="Total Stars">
-                <input type="number" [(ngModel)]="element.totalstars" value="{{element.totalstars}}" min="1">
-            </td>
-            <td data-th="Star Rating">
-                <star-rating [(value)]="element.value" [(totalstars)]="element.totalstars"
-                    checkedcolor="{{element.checkedcolor}}" uncheckedcolor="{{element.uncheckedcolor}}"
-                    size="{{element.size}}" readonly={{element.readonly}} (rate)="onRate($event)" #starrating>
-                </star-rating>
-            </td>
-        </tr>
-    </tbody>
+  <thead>
+      <tr>
+          <th>Checked Color</th>
+          <th>UnChecked Color</th>
+          <th>Rating Value</th>
+          <th>Size</th>
+          <th>Read Only</th>
+          <th>Total Stars</th>
+          <th>Star Rating</th>
+      </tr>
+  </thead>
+  <colgroup>
+      <col span="1">
+      <col span="1">
+      <col span="1">
+      <col span="1">
+      <col span="1">
+      <col span="1">
+      <col span="1">
+  </colgroup>
+  <tbody>
+      <tr *ngFor="let element of starRatingElements">
+          <td data-th="Checked Color">
+              <input type="text" [(ngModel)]="element.checkedcolor" value="{{element.checkedcolor}}">
+          </td>
+          <td data-th="UnChecked Color">
+              <input type="text" [(ngModel)]="element.uncheckedcolor" value="{{element.uncheckedcolor}}">
+          </td>
+          <td data-th="Rating Value">
+              <input type="number" [(ngModel)]="element.value" [(value)]="starrating.value">
+          </td>
+          <td data-th="Size">
+              <input type="number" [(ngModel)]="element.size" value="{{element.size}}">
+          </td>
+          <td data-th="Read Only">
+              <input type="checkbox" [(ngModel)]="element.readonly" value="{{element.readonly}}">
+          </td>
+          <td data-th="Total Stars">
+              <input type="number" [(ngModel)]="element.totalstars" value="{{element.totalstars}}" min="1">
+          </td>
+          <td data-th="Star Rating">
+              <star-rating [(value)]="element.value" [(totalstars)]="element.totalstars"
+                  checkedcolor="{{element.checkedcolor}}" uncheckedcolor="{{element.uncheckedcolor}}"
+                  size="{{element.size}}" readonly={{element.readonly}} (rate)="onRate($event)" #starrating>
+              </star-rating>
+          </td>
+      </tr>
+  </tbody>
 </table>

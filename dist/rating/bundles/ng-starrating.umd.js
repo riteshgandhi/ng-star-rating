@@ -210,8 +210,7 @@
             core.Component({
                 selector: 'lib-rating',
                 template: "\n    <p>\n      rating works!\n    </p>\n  "
-            }),
-            __metadata("design:paramtypes", [])
+            })
         ], RatingComponent);
         return RatingComponent;
     }());
@@ -223,47 +222,35 @@
             this._readOnly = false;
             this._totalStars = 5;
             this.rate = new core.EventEmitter();
-            if (!this.onStarsCountChange) {
-                this.onStarsCountChange = new rxjs.Subject();
-                this.onStarsCountChange.subscribe(function () {
-                    _this.setStars();
-                    _this.generateRating(true);
-                    _this.applySizeAllStars();
-                    _this.applyColorStyleAllStars(false);
-                    _this.addEvents();
-                });
-            }
-            if (!this.onValueChange) {
-                this.onValueChange = new rxjs.Subject();
-                this.onValueChange.subscribe(function () {
-                    _this.generateRating();
-                    _this.applySizeAllStars();
-                });
-            }
-            if (!this.onCheckedColorChange) {
-                this.onCheckedColorChange = new rxjs.Subject();
-                this.onCheckedColorChange.subscribe(function () {
-                    _this.applyColorStyleAllStars(true);
-                });
-            }
-            if (!this.onUnCheckedColorChange) {
-                this.onUnCheckedColorChange = new rxjs.Subject();
-                this.onUnCheckedColorChange.subscribe(function () {
-                    _this.applyColorStyleAllStars(false);
-                });
-            }
-            if (!this.onSizeChange) {
-                this.onSizeChange = new rxjs.Subject();
-                this.onSizeChange.subscribe(function () {
-                    _this.applySizeAllStars();
-                });
-            }
-            if (!this.onReadOnlyChange) {
-                this.onReadOnlyChange = new rxjs.Subject();
-                this.onReadOnlyChange.subscribe(function () {
-                    _this.readonly ? _this.makeReadOnly() : _this.makeEditable();
-                });
-            }
+            this.onStarsCountChange = new rxjs.Subject();
+            this.onStarsCountChange.subscribe(function () {
+                _this.setStars();
+                _this.generateRating(true);
+                _this.applySizeAllStars();
+                _this.applyColorStyleAllStars(false);
+                _this.addEvents();
+            });
+            this.onValueChange = new rxjs.Subject();
+            this.onValueChange.subscribe(function () {
+                _this.generateRating();
+                _this.applySizeAllStars();
+            });
+            this.onCheckedColorChange = new rxjs.Subject();
+            this.onCheckedColorChange.subscribe(function () {
+                _this.applyColorStyleAllStars(true);
+            });
+            this.onUnCheckedColorChange = new rxjs.Subject();
+            this.onUnCheckedColorChange.subscribe(function () {
+                _this.applyColorStyleAllStars(false);
+            });
+            this.onSizeChange = new rxjs.Subject();
+            this.onSizeChange.subscribe(function () {
+                _this.applySizeAllStars();
+            });
+            this.onReadOnlyChange = new rxjs.Subject();
+            this.onReadOnlyChange.subscribe(function () {
+                _this.readonly ? _this.makeReadOnly() : _this.makeEditable();
+            });
         }
         StarRatingComponent_1 = StarRatingComponent;
         Object.defineProperty(StarRatingComponent.prototype, "checkedcolor", {
@@ -376,9 +363,9 @@
             var star = event.srcElement;
             var oldValue = this.value;
             this.value = parseInt(star.dataset.index);
-            if (this.value == 0) {
-                this.value = 1;
-            }
+            // if (this.value == 0) {
+            //   this.value = 1;
+            // }
             var rateValues = { oldValue: oldValue, newValue: this.value, starRating: this };
             this.rate.emit(rateValues);
         };
@@ -430,9 +417,6 @@
             if (this._size) {
                 this.stars.length == 0 && this.setStars();
                 this.stars.forEach(function (star) {
-                    // const newSize = this._size.match(/\d+/)[0];
-                    // let halfSize = parseInt(newSize, 10) / 2;
-                    // let halfMargin = 0 - parseInt(newSize, 10);        
                     var newSize = _this.size.match(/\d+/)[0];
                     var halfSize = (parseInt(newSize) * 10) / 24;
                     var halfMargin = 0 - ((parseInt(newSize) * 20) / 24);
@@ -469,35 +453,35 @@
         StarRatingComponent.prototype.generateRating = function (forceGenerate) {
             var _this = this;
             if (forceGenerate === void 0) { forceGenerate = false; }
-            if (this.readonly && !forceGenerate)
-                return;
             if (!this.mainElement)
                 return;
+            if (this.readonly && !forceGenerate)
+                return;
+            //if (this.value >= 0) {
             this.stars.length == 0 && this.setStars();
-            if (this.value >= 0) {
-                this.mainElement.nativeElement.title = this.value;
-                var hasDecimals_1 = ((Number.parseFloat(this.value.toString()) % 1)
-                    .toString()
-                    .substring(3, 2)) ? true : false;
-                var i_1 = 1;
-                this.stars.forEach(function (star) {
-                    star.className = "";
-                    _this.applyColorStyle(star);
-                    _this.addDefaultClass(star);
-                    if (_this.value >= i_1) {
-                        // star on
-                        _this.addCheckedStarClass(star);
+            this.mainElement.nativeElement.title = this.value;
+            var hasDecimals = ((Number.parseFloat(this.value.toString()) % 1)
+                .toString()
+                .substring(3, 2)) ? true : false;
+            var i = 1;
+            this.stars.forEach(function (star) {
+                star.className = "";
+                _this.applyColorStyle(star);
+                _this.addDefaultClass(star);
+                if (_this.value >= i) {
+                    // star on
+                    _this.addCheckedStarClass(star);
+                }
+                else {
+                    // half star
+                    if (hasDecimals) {
+                        _this.addHalfStarClass(star);
+                        hasDecimals = false;
                     }
-                    else {
-                        // half star
-                        if (hasDecimals_1) {
-                            _this.addHalfStarClass(star);
-                            hasDecimals_1 = false;
-                        }
-                    }
-                    i_1++;
-                });
-            }
+                }
+                i++;
+            });
+            //}
         };
         var StarRatingComponent_1;
         StarRatingComponent.VAR_CHECKED_COLOR = '--checkedColor';
@@ -515,51 +499,36 @@
         StarRatingComponent.INP_READONLY = 'readonly';
         StarRatingComponent.INP_TOTALSTARS = 'totalstars';
         __decorate([
-            core.ViewChild('starMain', { static: true }),
-            __metadata("design:type", core.ElementRef)
+            core.ViewChild('starMain', { static: true })
         ], StarRatingComponent.prototype, "mainElement", void 0);
         __decorate([
-            core.Output(),
-            __metadata("design:type", core.EventEmitter)
+            core.Output()
         ], StarRatingComponent.prototype, "rate", void 0);
         __decorate([
-            core.Input(StarRatingComponent_1.INP_CHECKED_COLOR),
-            __metadata("design:type", String),
-            __metadata("design:paramtypes", [String])
+            core.Input(StarRatingComponent_1.INP_CHECKED_COLOR)
         ], StarRatingComponent.prototype, "checkedcolor", null);
         __decorate([
-            core.Input(StarRatingComponent_1.INP_UNCHECKED_COLOR),
-            __metadata("design:type", String),
-            __metadata("design:paramtypes", [String])
+            core.Input(StarRatingComponent_1.INP_UNCHECKED_COLOR)
         ], StarRatingComponent.prototype, "uncheckedcolor", null);
         __decorate([
-            core.Input(StarRatingComponent_1.INP_VALUE),
-            __metadata("design:type", Number),
-            __metadata("design:paramtypes", [Number])
+            core.Input(StarRatingComponent_1.INP_VALUE)
         ], StarRatingComponent.prototype, "value", null);
         __decorate([
-            core.Input(StarRatingComponent_1.INP_SIZE),
-            __metadata("design:type", String),
-            __metadata("design:paramtypes", [String])
+            core.Input(StarRatingComponent_1.INP_SIZE)
         ], StarRatingComponent.prototype, "size", null);
         __decorate([
-            core.Input(StarRatingComponent_1.INP_READONLY),
-            __metadata("design:type", Boolean),
-            __metadata("design:paramtypes", [Boolean])
+            core.Input(StarRatingComponent_1.INP_READONLY)
         ], StarRatingComponent.prototype, "readonly", null);
         __decorate([
-            core.Input(StarRatingComponent_1.INP_TOTALSTARS),
-            __metadata("design:type", Number),
-            __metadata("design:paramtypes", [Number])
+            core.Input(StarRatingComponent_1.INP_TOTALSTARS)
         ], StarRatingComponent.prototype, "totalstars", null);
         StarRatingComponent = StarRatingComponent_1 = __decorate([
             core.Component({
                 selector: 'star-rating',
-                template: "<div #starMain>\r\n</div>\r\n\r\n<!-- <ng-container *ngFor=\"let star of stars; let i = index;\">\r\n    <span \r\n        (click)=\"!isReadOnly && onRate(i)\" \r\n        (mouseleave)=\"!isReadOnly && generateRating()\"\r\n        (mouseenter)=\"!isReadOnly && onStar(i)\" \r\n        [ngStyle]=\"{\r\n            'font-size': getSize(),\r\n            'width': getSize(),\r\n            pointer: isReadOnly ? 'default' : 'pointer'\r\n        }\" \r\n        [ngClass]=\"{\r\n            on: star.checked,\r\n            half: star.isHalf,\r\n            readOnly: isReadOnly,\r\n            editable: !isReadOnly\r\n        }\"></span>\r\n</ng-container> -->",
+                template: "<div #starMain>\n</div>",
                 encapsulation: core.ViewEncapsulation.ShadowDom,
                 styles: [":root{--checkedColor:gold;--unCheckedColor:gray;--size:24px;--halfWidth:10px;--halfMargin:-20px}.star{cursor:pointer;color:var(--unCheckedColor);font-size:var(--size);width:var(--size);display:inline-block}.star:last-child{margin-right:0}.star:before{content:'\\2605'}.star.on{color:var(--checkedColor)}.star.half:after{content:'\\2605';color:var(--checkedColor);position:absolute;margin-left:var(--halfMargin);width:var(--halfWidth);overflow:hidden}"]
-            }),
-            __metadata("design:paramtypes", [])
+            })
         ], StarRatingComponent);
         return StarRatingComponent;
     }());
