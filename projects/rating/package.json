@@ -2,8 +2,8 @@
   "name": "ng-starrating",
   "version": "1.0.20",
   "peerDependencies": {
-    "@angular/common": "^9.0.1",
-    "@angular/core": "^9.0.1"
+    "@angular/common": "*",
+    "@angular/core": "*",
   },
   "dependencies": {
     "tslib": "^2.0.0"
