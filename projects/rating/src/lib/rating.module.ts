@@ -5,14 +5,14 @@ import { RatingComponent } from './rating.component';
 import { StarRatingComponent } from '../components/star-rating/star-rating.component';
 
 @NgModule({
-  imports: [
-    FormsModule,
-    CommonModule
-  ],
-  declarations: [
-    RatingComponent, 
-    StarRatingComponent],
-  exports: [StarRatingComponent],
-  entryComponents: [StarRatingComponent]
+    imports: [
+        FormsModule,
+        CommonModule
+    ],
+    declarations: [
+        RatingComponent,
+        StarRatingComponent
+    ],
+    exports: [StarRatingComponent]
 })
 export class RatingModule {ngDoBootstrap() {}}
