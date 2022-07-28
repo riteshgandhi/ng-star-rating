@@ -1,12 +1,13 @@
 {
   "name": "ng-starrating",
-  "version": "1.0.20",
+  "version": "1.1.0",
   "peerDependencies": {
-    "@angular/common": "^9.0.1",
-    "@angular/core": "^9.0.1",
-    "tslib": "^1.10.0"
+    "@angular/common": "^14.1.0",
+    "@angular/core": "^14.1.0"
   },
-  "dependencies": {},
+  "dependencies": {
+    "tslib": "^2.0.0"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/riteshgandhi/ng-star-rating"
@@ -34,14 +35,24 @@
     "Ritesh Gandhi <ritesh.j.gandhi@gmail.com> (https://github.com/riteshgandhi)"
   ],
   "license": "MIT",
-  "main": "bundles/ng-starrating.umd.js",
-  "module": "fesm5/ng-starrating.js",
-  "es2015": "fesm2015/ng-starrating.js",
-  "esm5": "esm5/ng-starrating.js",
-  "esm2015": "esm2015/ng-starrating.js",
-  "fesm5": "fesm5/ng-starrating.js",
-  "fesm2015": "fesm2015/ng-starrating.js",
-  "typings": "ng-starrating.d.ts",
-  "metadata": "ng-starrating.metadata.json",
+  "module": "fesm2015/ng-starrating.mjs",
+  "es2020": "fesm2020/ng-starrating.mjs",
+  "esm2020": "esm2020/ng-starrating.mjs",
+  "fesm2020": "fesm2020/ng-starrating.mjs",
+  "fesm2015": "fesm2015/ng-starrating.mjs",
+  "typings": "index.d.ts",
+  "exports": {
+    "./package.json": {
+      "default": "./package.json"
+    },
+    ".": {
+      "types": "./index.d.ts",
+      "esm2020": "./esm2020/ng-starrating.mjs",
+      "es2020": "./fesm2020/ng-starrating.mjs",
+      "es2015": "./fesm2015/ng-starrating.mjs",
+      "node": "./fesm2015/ng-starrating.mjs",
+      "default": "./fesm2020/ng-starrating.mjs"
+    }
+  },
   "sideEffects": false
 }

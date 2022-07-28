@@ -1,4 +1,5 @@
 import { EventEmitter } from '@angular/core';
+import * as i0 from "@angular/core";
 export declare class StarRatingComponent {
     private stars;
     private _checkedColor;
@@ -63,4 +64,6 @@ export declare class StarRatingComponent {
     private applyCheckedColorStyle;
     private applyUnCheckedColorStyle;
     private generateRating;
+    static ɵfac: i0.ɵɵFactoryDeclaration<StarRatingComponent, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<StarRatingComponent, "star-rating", never, { "checkedcolor": "checkedcolor"; "uncheckedcolor": "uncheckedcolor"; "value": "value"; "size": "size"; "readonly": "readonly"; "totalstars": "totalstars"; }, { "rate": "rate"; }, never, never, false>;
 }
